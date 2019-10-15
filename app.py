@@ -20,7 +20,8 @@ app = Flask(__name__)
 @app.route('/get_items_tracked')
 def get_items_tracked():
 	# return render_template('items.html', items=mongo.db.items.find())
-	return mongo.db.items.find())
+	return render_template('base.html')
+	# return mongo.db.items.find())
 
 if __name__=='__main__':
 	# Environment variables set in heroku
