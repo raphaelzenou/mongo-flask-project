@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 
 
 #mongo DB details:
-# Note that app.config["MONGO_DBNAME"] = 'mongo-flask-project' is now optional
+# Note that app.config["MONGO_DBNAME"] = 'price-tracker' is now optional
 mongo_pwd = os.environ.get('MONGOPWD')
 mongo_url = 'mongodb+srv://mongodb_admin:' + mongo_pwd + '@cluster0-byamh.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
