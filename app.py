@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-	return 'Bonjour World'
+	return 'Bonjour Heroku'
 
 if __name__=='__main__':
 	# Environment variables set in heroku
