@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 
 
 #mongo DB details:
-# Note that app.config["MONGO_DBNAME"] = 'price-tracker' is now optional
+['MONGO_DBNAME'] = 'price-tracker' is now optional
 mongo_pwd = os.environ.get('MONGOPWD')
 mongo_url = 'mongodb+srv://mongodb_admin:' + mongo_pwd + '@cluster0-byamh.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
@@ -19,7 +19,8 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/get_items_tracked')
 def get_items_tracked():
-	return render_template('items.html', items=mongo.db.items.find())
+	# return render_template('items.html', items=mongo.db.items.find())
+	return mongo.db.items.find())
 
 if __name__=='__main__':
 	# Environment variables set in heroku
