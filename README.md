@@ -46,8 +46,10 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - Flask-PyMongo 2.3.0 to Interact with our MongoDB Atlas noSQL database
     * https://pypi.org/project/Flask-PyMongo/ 
 - Requests 2.22.0
-    * https://pypi.org/project/requests/ 
+    * Used to get information from websites using HTTP requests
+    * https://requests.kennethreitz.org/en/master/
 - Beautifulsoup4  4.8.1 for Web Scraping
+    * Used to parse website code obtained using the Requests library
     * https://pypi.org/project/beautifulsoup4/ 
 - Materialize CSS Framework 
     * https://materializecss.com/
@@ -91,3 +93,4 @@ In particular, you should provide all details of the differences between the dep
 - I received inspiration for this project from 
     * Simo Edwin https://github.com/DevEdwin
     * Corey Schaefer Beautiful Soup courses https://coreyms.com/ 
+    * Best practices for web scraping here: https://medium.com/python-pandemonium/6-things-to-develop-an-efficient-web-scraper-in-python-1dffa688793c 
