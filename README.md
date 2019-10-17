@@ -32,6 +32,8 @@ In this section, you should go over the different parts of your project, and des
 ### Features Left to Implement
 - Login system:  a user login system is not required for the project, but I am thinking of adding one if time permits).
 - Email alerts: an email alert system using Gmail's SMTP.
+- CRON : runs on UNIX (equivalent to Django CRON)
+https://pythonprogramming.net/crontab-tutorial-basics/
 
 ## Technologies Used
 
@@ -43,6 +45,8 @@ In this section, you should mention all of the languages, frameworks, libraries,
     * https://palletsprojects.com/p/flask/ 
 - Flask-PyMongo 2.3.0 to Interact with our MongoDB Atlas noSQL database
     * https://pypi.org/project/Flask-PyMongo/ 
+- Requests 2.22.0
+    * https://pypi.org/project/requests/ 
 - Beautifulsoup4  4.8.1 for Web Scraping
     * https://pypi.org/project/beautifulsoup4/ 
 - Materialize CSS Framework 
