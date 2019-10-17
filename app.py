@@ -3,25 +3,23 @@ from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+app = Flask(__name__)
 
 #mongo DB details:
-['MONGO_DBNAME'] = 'price-tracker' is now optional
+# ['MONGO_DBNAME'] = 'price-tracker' is now optional
 mongo_pwd = os.environ.get('MONGOPWD')
-mongo_url = 'mongodb+srv://mongodb_admin:'+mongo_pwd+'@cluster0-byamh.gcp.mongodb.net/test?retryWrites=true&w=majority'
-
+mongo_dbname = 'price-tracker'
+mongo_url = 'mongodb+srv://mongodb_admin:'+ mongo_pwd +'@cluster0-byamh.gcp.mongodb.net/'+ mongo_dbname +'?retryWrites=true&w=majority'
 app.config["MONGO_URI"] = mongo_url
 
 #Creating a PyMongo instance
 mongo = PyMongo(app)
 
-app = Flask(__name__)
 
 @app.route('/')
-@app.route('/get_items_tracked')
-def get_items_tracked():
-	# return render_template('items.html', items=mongo.db.items.find())
-	return render_template('base.html')
-	# return mongo.db.items.find())
+# @app.route('/get_items_tracked')
+def hello():
+	return render_template('items.html', items=mongo.db.items.find())
 
 if __name__=='__main__':
 	# Environment variables set in heroku
