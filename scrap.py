@@ -3,7 +3,13 @@ from bs4 import BeautifulSoup
 
 # *** INITIAL HTTP REQUEST *** 
 
-item_url = 'https://www.amazon.co.uk/Mofi-Samsung-Galaxy-Shockproof-Protective/dp/B07N2N57BK/ref=sr_1_1_sspa?crid=3QZIKP0JHMF6F&keywords=samsung+s10%2B&qid=1571330525&sprefix=samsing%2Caps%2C168&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExS0VPVUpJOUpOV0hEJmVuY3J5cHRlZElkPUEwMjQyNzI0RFNRVjlSOEI3MDEmZW5jcnlwdGVkQWRJZD1BMDg0OTIzNE9XTEFET0UwMU5BNiZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU='
+# item_url = 'https://www.amazon.co.uk/Mofi-Samsung-Galaxy-Shockproof-Protective/dp/B07N2N57BK/ref=sr_1_1_sspa?crid=3QZIKP0JHMF6F&keywords=samsung+s10%2B&qid=1571330525&sprefix=samsing%2Caps%2C168&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExS0VPVUpJOUpOV0hEJmVuY3J5cHRlZElkPUEwMjQyNzI0RFNRVjlSOEI3MDEmZW5jcnlwdGVkQWRJZD1BMDg0OTIzNE9XTEFET0UwMU5BNiZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU='
+
+# item_url = 'https://www.amazon.co.uk/gp/product/B01MYQ4HJD?pf_rd_p=330fbd82-d4fe-42e5-9c16-d4b886747c64&pf_rd_r=QT4FQNQA5Q800RZYRPCM'
+
+# AMAZON PRODUCTS - SPECIAL PAGES
+# item_url='https://www.amazon.co.uk/dp/B07747FR44/ref=gw_uk_desk_h1_eink_ms_ot19?pf_rd_p=dad4c181-dcea-4a21-8c76-f88b8f299127&pf_rd_r=20MHW08BWPEPZKFZHEYG'
+item_url ='https://www.amazon.co.uk/gp/product/B07KD7TJD6?ref=ODS_v2_FS_AUCC_ck'
 
 fake_headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'}
 # obtained simply googling 'my user agent'
@@ -33,7 +39,26 @@ def amazscrap(url, headers):
     item_title = item_page_soup.find(id='productTitle').get_text().strip()
     item_short_title = item_title[0:30]
 
-    item_price_with_currency = item_page_soup.find(id='priceblock_ourprice').get_text().strip()
+
+    # Categories is not displayed exactly the same Way depending on whether the page is an Amazon Device page or no
+    # Amazon has a different html for their own devices vs other ones
+    # That is why we are using a try / except block
+
+    try :
+        item_category_list = item_page_soup.findAll('span',attrs={'class':'nav-a-content'})
+        item_category = item_category_list[0].text.strip()
+       
+
+    except:
+        item_category = item_page_soup.find(id='HOME').get_text().strip()
+
+    # The same logic applies to , even if the html here is much more similar - only the div id differs
+
+    try :
+        item_price_with_currency = item_page_soup.find(id='priceblock_ourprice').get_text().strip()
+    except:
+        item_price_with_currency = item_page_soup.find(id='priceblock_dealprice').get_text().strip()
+
     item_currency = item_price_with_currency[0]
     item_price_string = item_price_with_currency[1:len(item_price_with_currency)]
     item_price_float = float(item_price_string.replace(',',''))
@@ -50,6 +75,7 @@ def amazscrap(url, headers):
         print('Sorry scraper is not working for this page, are you sure it is an amazon standard product page?')
     else: 
         print(item_short_title)
+        print(item_category)
         print(item_currency)
         print(item_price_float)
         print(image_main_link)

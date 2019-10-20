@@ -12,6 +12,7 @@ mongo_dbname = 'price-tracker'
 mongo_url = 'mongodb+srv://mongodb_admin:'+ mongo_pwd +'@cluster0-byamh.gcp.mongodb.net/'+ mongo_dbname +'?retryWrites=true&w=majority'
 app.config["MONGO_URI"] = mongo_url
 
+
 #Creating a PyMongo instance
 mongo = PyMongo(app)
 

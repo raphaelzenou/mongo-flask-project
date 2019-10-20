@@ -54,7 +54,11 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - Materialize CSS Framework 
     * https://materializecss.com/
 
-
+Technologies considered but not used :
+- Flask Bootstrap for an easier Bootstrap integration notably with the WTF package
+    * https://pythonhosted.org/Flask-Bootstrap/forms.html
+- Flask WTF to generate forms in the backend quickly (especially using quickforms)
+    * https://flask-wtf.readthedocs.io/en/stable/ 
 
 ## Testing (section TBC)
 
