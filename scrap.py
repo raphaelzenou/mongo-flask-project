@@ -7,9 +7,13 @@ from bs4 import BeautifulSoup
 
 # item_url = 'https://www.amazon.co.uk/gp/product/B01MYQ4HJD?pf_rd_p=330fbd82-d4fe-42e5-9c16-d4b886747c64&pf_rd_r=QT4FQNQA5Q800RZYRPCM'
 
+item_url = 'https://www.amazon.co.uk/VYTRONIX-Lightweight-Lithium-Cordless-Handheld/dp/B07F6J751B?ref_=Oct_TopRatedC_391784011_2&pf_rd_r=VZD8FQCX0HZHXNP6F9KE&pf_rd_p=92049089-1eb0-53ef-9af8-b7ecd9559493&pf_rd_s=merchandised-search-10&pf_rd_t=101&pf_rd_i=391784011&pf_rd_m=A3P5ROKL5A1OLE'
+
 # AMAZON PRODUCTS - SPECIAL PAGES
 # item_url='https://www.amazon.co.uk/dp/B07747FR44/ref=gw_uk_desk_h1_eink_ms_ot19?pf_rd_p=dad4c181-dcea-4a21-8c76-f88b8f299127&pf_rd_r=20MHW08BWPEPZKFZHEYG'
-item_url ='https://www.amazon.co.uk/gp/product/B07KD7TJD6?ref=ODS_v2_FS_AUCC_ck'
+# item_url ='https://www.amazon.co.uk/gp/product/B07KD7TJD6?ref=ODS_v2_FS_AUCC_ck'
+
+# item_url ='https://www.amazon.co.uk/AmazonBasics-Microfibre-Fitted-Double-Burgundy/dp/B06XHJ4M3Y?ref_=Oct_DLandingS_PC_9ec15156_0&smid=A3P5ROKL5A1OLE'
 
 fake_headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'}
 # obtained simply googling 'my user agent'
@@ -37,7 +41,11 @@ def amazscrap(url, headers):
     # We are only getting the text as we do not need the <span> and any other tags
     # text has to get stripped as amazon is adding a lot of empty spaces in their html source code
     item_title = item_page_soup.find(id='productTitle').get_text().strip()
-    item_short_title = item_title[0:30]
+    
+    if len(item_title) <= 50 :
+        item_short_title = item_title
+    else:
+        item_short_title = item_title[0:50]
 
 
     # Categories is not displayed exactly the same Way depending on whether the page is an Amazon Device page or no

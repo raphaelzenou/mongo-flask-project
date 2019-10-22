@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/mongo-flask-venv": true,
+        "**/.vscode": true
+    }
+}
