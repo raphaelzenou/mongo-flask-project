@@ -1,17 +1,21 @@
-{% extends "templates/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
 
 {% block main %}
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            {% for item in items %}
-                {{item.item_name}}
-            {% endfor %}
-        </div>
+<h1>Sign up</h1>
+<hr>
+
+<form action="/new-item" method="POST">
+
+    <div class="form-group">
+        <label>Item's Page Link from Amazon</label>
+        <input type="text" class="form-control" id="item-url" name="item-url" placeholder="Please enter the full item's URL here..">
     </div>
-</div>
+
+    <button type="submit" class="btn btn-primary">Sign up</button>
+
+</form>
 
 {% endblock %}
