@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 #mongo DB details:
 # ['MONGO_DBNAME'] = 'price-tracker' is now optional
