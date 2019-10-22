@@ -22,9 +22,9 @@ mongo = PyMongo(app)
 def hello():
 	return render_template('items.html', items=mongo.db.items.find())
 
-@app.route('/new-item')
-def new_item_func()
-	return render_template('new-item.html')
+# @app.route('/new-item')
+# def new_item_func()
+# 	return render_template('new-item.html')
 
 if __name__=='__main__':
 	# Environment variables set in heroku
