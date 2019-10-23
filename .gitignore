@@ -1,3 +1,4 @@
 mongo-flask-venv
 gitignored
 .vscode
+.env

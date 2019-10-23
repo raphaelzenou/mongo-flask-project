@@ -45,7 +45,7 @@ def amazscrap(url, headers=fake_headers):
     if len(item_title) <= 50 :
         item_short_title = item_title
     else:
-        item_short_title = item_title[0:50]
+        item_short_title = item_title[0:45] + '[...]'
 
 
     # Categories is not displayed exactly the same Way depending on whether the page is an Amazon Device page or no

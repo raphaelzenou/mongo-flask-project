@@ -53,6 +53,8 @@ In this section, you should mention all of the languages, frameworks, libraries,
     * https://pypi.org/project/beautifulsoup4/ 
 - Materialize CSS Framework 
     * https://materializecss.com/
+- Dot-Env
+    * https://simpleit.rocks/python/flask/managing-environment-configuration-variables-in-flask-with-dotenv/
 - ReCaptcha
     * https://techmonger.github.io/5/python-flask-recaptcha/ 
 

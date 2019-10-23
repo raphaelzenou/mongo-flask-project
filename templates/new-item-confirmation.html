@@ -7,5 +7,18 @@
 <h1>Item confirmation before proceeding... </h1>
 <hr>
 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>Item: {{item.item_short_title}}</p>
+            <p>Category : {{item.item_category}}</p>
+            <p>Price : {{item.item_currency}} {{item.item_price_float}}</p>
+        </div>
+    </div>
+    <div class="col">
+        <img src="{{item.image_main_link}}" alt="Item Image">
+    </div>
+
+</div>
 
 {% endblock %}
