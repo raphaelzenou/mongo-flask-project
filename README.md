@@ -67,6 +67,9 @@ Technologies considered but not used :
 
 ## Testing (section TBC)
 
+https://stackoverflow.com/questions/41366099/getting-blocked-when-scraping-amazon-even-with-headers-proxies-delay
+
+
 I am planning to perform manual and potentially also automated testing using PyTest (not yet included in the packages) :
 https://flask.palletsprojects.com/en/1.0.x/testing/ 
 

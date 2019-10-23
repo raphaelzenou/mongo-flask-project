@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 # item_url ='https://www.amazon.co.uk/gp/product/B07KD7TJD6?ref=ODS_v2_FS_AUCC_ck'
 
 # item_url ='https://www.amazon.co.uk/AmazonBasics-Microfibre-Fitted-Double-Burgundy/dp/B06XHJ4M3Y?ref_=Oct_DLandingS_PC_9ec15156_0&smid=A3P5ROKL5A1OLE'
+item_url ='https://www.amazon.fr/Vamvo-%C3%89cran-Projection-Ext%C3%A9rieur-Activit%C3%A9s/dp/B07Q8SHKDP?ref_=Oct_DotdC_eqtvub_1_217e268a&pf_rd_p=2465262f-6862-52a6-ae27-9940c3dd6129&pf_rd_s=merchandised-search-4&pf_rd_t=101&pf_rd_i=498008011&pf_rd_m=A1X6FK5RDHNB96&pf_rd_r=S6XX4WS5CZ7ZBN4FVRMQ&pf_rd_r=S6XX4WS5CZ7ZBN4FVRMQ&pf_rd_p=2465262f-6862-52a6-ae27-9940c3dd6129'
 
 fake_headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'}
 # obtained simply googling 'my user agent'
@@ -65,11 +66,21 @@ def amazscrap(url, headers=fake_headers):
     try :
         item_price_with_currency = item_page_soup.find(id='priceblock_ourprice').get_text().strip()
     except:
-        item_price_with_currency = item_page_soup.find(id='priceblock_dealprice').get_text().strip()
+        try:
+            item_price_with_currency = item_page_soup.find(id='priceblock_dealprice').get_text().strip()
+        except: 
+            item_price_with_currency = item_page_soup.find(id='priceblock_saleprice').get_text().strip()
 
-    item_currency = item_price_with_currency[0]
-    item_price_string = item_price_with_currency[1:len(item_price_with_currency)]
-    item_price_float = float(item_price_string.replace(',',''))
+    # Now if the currency is at the end and the European format
+
+    try:
+        item_currency = item_price_with_currency[0]
+        item_price_string = item_price_with_currency[1:len(item_price_with_currency)]
+        item_price_float = float(item_price_string.replace(',',''))
+    except:
+        item_currency = item_price_with_currency[-1]
+        item_price_string = item_price_with_currency[0:len(item_price_with_currency)-1]
+        item_price_float = float(item_price_string.replace(' ','').replace(',','.'))
 
     # unfortunately with amazon simply using item_page_soup.find(id='landingImage')['src'] will get you the encoded base 64 image instead of the url
     image_links = item_page_soup.find('img', {'id':'landingImage'})['data-a-dynamic-image']
@@ -96,5 +107,13 @@ def amazscrap(url, headers=fake_headers):
         'item_url':url}
         return item_chars
 
+        # return {'item_short_title' : "bla bla", 
+        # 'item_title' : "bla",
+        # 'item_category' : "amazon basics", 
+        # 'item_currency' : "$", 
+        # 'item_price_float' : 99.87, 
+        # 'item_image_main_link' : 'https://www.adorama.com/images/Large/lcvlux5.jpg', 
+        # 'item_url':'https://www.amazon.fr/Crosstour-T%C3%A9l%C3%A9commande-%C2%B0Grand-Angle-Rechargeables-Accessoires/dp/B073WX4VLJ?pf_rd_p=4b0ceb4a-7efa-4f71-9e36-0702523b7dfc&pd_rd_wg=wlFSG&pf_rd_r=QJZ3QB4KBARFNR3YXT1Q&ref_=pd_gw_unk&pd_rd_w=WNA0w&pd_rd_r=9d9705f7-95a4-4236-a526-d61a38c8f0b8'}
 
-# amazscrap(item_url, fake_headers)
+
+amazscrap(item_url, fake_headers)
