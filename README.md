@@ -67,6 +67,8 @@ Technologies considered but not used :
 
 ## Testing (section TBC)
 
+DOESN'T WORK with clothes and DVDs/CDs.
+
 https://stackoverflow.com/questions/41366099/getting-blocked-when-scraping-amazon-even-with-headers-proxies-delay
 
 

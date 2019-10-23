@@ -10,16 +10,27 @@
 <div class="container">
     <div class="row">
         <div class="col">
+            <form action="{{ url_for('add_item')}}" method="POST">
+                <label>Item : </label>
+                <input type="hidden" value="{{item.item_short_title}}" id="item_short_title"
+                    name="item_short_title" required>
+                <label>Category : </label>
+                <input type="hidden"  value="{{item.item_category}}" id="item_category"
+                    name="item_category" type="hidden" required>
+
+                
+                <button type="submit" class="btn btn-primary">OK!</button>
+            </form>
+        </div>
+
+        <div class="col">
             <p>Item: {{item.item_short_title}}</p>
             <p>Category : {{item.item_category}}</p>
             <p>Price : {{item.item_currency}}{{item.item_price_float}}</p>
             <p><a href="{{item.item_url}}" target="_blank">Link</a></p>
+            <a href="{{item.item_url}}" target="_blank"><img src="{{item.item_image_main_link}}" alt="Item Image"></a>
         </div>
     </div>
-    <div class="col">
-        <a href="{{item.item_url}}" target="_blank"><img src="{{item.item_image_main_link}}" alt="Item Image"></a>
-    </div>
-
 </div>
 
 {% endblock %}

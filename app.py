@@ -42,11 +42,17 @@ def new_item_func():
 @app.route('/confirmation', methods=["GET", "POST"])
 def new_item_conf_func():
 	new_item_form = request.form
-	item = amazscrap(new_item_form['item-url'])
+	item = amazscrap(new_item_form['item_url'])
 	return render_template('new-item-confirmation.html', item=item)
+
+@app.route('/add', methods=["GET", "POST"])
+def add_item():
+	new_item_form_ok = request.form
+
+	return new_item_form_ok
 
 # Running the app
 if __name__=='__main__':
 	app.run(host=os.getenv('IP'),
 	port=int(os.getenv('PORT')),
-	debug=False)
+	debug=True)
