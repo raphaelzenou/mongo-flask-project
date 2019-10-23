@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 # item_url = 'https://www.amazon.co.uk/gp/product/B01MYQ4HJD?pf_rd_p=330fbd82-d4fe-42e5-9c16-d4b886747c64&pf_rd_r=QT4FQNQA5Q800RZYRPCM'
 
-item_url = 'https://www.amazon.co.uk/VYTRONIX-Lightweight-Lithium-Cordless-Handheld/dp/B07F6J751B?ref_=Oct_TopRatedC_391784011_2&pf_rd_r=VZD8FQCX0HZHXNP6F9KE&pf_rd_p=92049089-1eb0-53ef-9af8-b7ecd9559493&pf_rd_s=merchandised-search-10&pf_rd_t=101&pf_rd_i=391784011&pf_rd_m=A3P5ROKL5A1OLE'
+# item_url = 'https://www.amazon.co.uk/VYTRONIX-Lightweight-Lithium-Cordless-Handheld/dp/B07F6J751B?ref_=Oct_TopRatedC_391784011_2&pf_rd_r=VZD8FQCX0HZHXNP6F9KE&pf_rd_p=92049089-1eb0-53ef-9af8-b7ecd9559493&pf_rd_s=merchandised-search-10&pf_rd_t=101&pf_rd_i=391784011&pf_rd_m=A3P5ROKL5A1OLE'
 
 # AMAZON PRODUCTS - SPECIAL PAGES
 # item_url='https://www.amazon.co.uk/dp/B07747FR44/ref=gw_uk_desk_h1_eink_ms_ot19?pf_rd_p=dad4c181-dcea-4a21-8c76-f88b8f299127&pf_rd_r=20MHW08BWPEPZKFZHEYG'
@@ -19,9 +19,9 @@ fake_headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) 
 # obtained simply googling 'my user agent'
 
 
-def amazscrap(url, headers):
+def amazscrap(url, headers=fake_headers):
 
-    item_page = requests.get(item_url, headers=fake_headers)
+    item_page = requests.get(url, headers=headers)
     # headers are necessary on amazon to not get a http response 503 instead of a 200
 
     # *** CHECKING THE HTPP REQUEST RESPONSE *** 
@@ -87,5 +87,8 @@ def amazscrap(url, headers):
         print(item_currency)
         print(item_price_float)
         print(image_main_link)
+        item_chars = {'item_short_title' : item_short_title, 'item_category' : item_category , 'item_currency' : item_currency, 'item_price_float' : item_price_float, 'image_main_link' : image_main_link}
+        return item_chars
 
-amazscrap(item_url, fake_headers)
+
+# amazscrap(item_url, fake_headers)

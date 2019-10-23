@@ -53,6 +53,8 @@ In this section, you should mention all of the languages, frameworks, libraries,
     * https://pypi.org/project/beautifulsoup4/ 
 - Materialize CSS Framework 
     * https://materializecss.com/
+- ReCaptcha
+    * https://techmonger.github.io/5/python-flask-recaptcha/ 
 
 Technologies considered but not used :
 - Flask Bootstrap for an easier Bootstrap integration notably with the WTF package

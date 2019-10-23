@@ -7,15 +7,26 @@
 <h1>Which item's price would you like to track ?</h1>
 <hr>
 
-<form action="/new-item" method="POST">
+<form action="{{ url_for('new_item_conf_func') }}" method="POST">
 
     <div class="form-group">
-        <label>Item's Page Link from Amazon</label>
-        <input type="text" class="form-control" id="item-url" name="item-url" placeholder="Please enter the full item's URL here..">
-    </div>
+        <label>Item's Page Link from Amazon: </label>
+        <input type="text" class="form-control" id="item-url" name="item-url" placeholder="Please enter the full item's URL here.." required>
+    <!-- </div>
+        <label>Security check: </label>
+        <div class="form-group g-recaptcha" data-sitekey="{{ sitekey }}">
+    </div> -->
 
     <button type="submit" class="btn btn-primary">Sign up</button>
 
+    {% if feedback %}
+    <br><p class="text-danger float-right">{{ feedback }}</p>
+    {% endif %}
 </form>
+
+    {% block script %}
+    <!-- Google ReCaptcha script
+    <script src="https://www.google.com/recaptcha/api.js"></script> -->
+    {% endblock %}
 
 {% endblock %}
