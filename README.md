@@ -55,6 +55,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
     * https://materializecss.com/
 - Dot-Env
     * https://simpleit.rocks/python/flask/managing-environment-configuration-variables-in-flask-with-dotenv/
+    * https://pypi.org/project/python-dotenv/
 - ReCaptcha
     * https://techmonger.github.io/5/python-flask-recaptcha/ 
 

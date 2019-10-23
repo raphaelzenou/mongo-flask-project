@@ -1,8 +1,11 @@
+# Standard or External packages
 import os
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
+
+# Own packages
 from scrap import amazscrap
 
 app = Flask(__name__, template_folder='templates')
@@ -36,7 +39,10 @@ def new_item_conf_func():
 
 if __name__=='__main__':
 	# Environment variables set in heroku
-	app.run(debug=True)
+	# app.run(debug=True)
+	app.run(host=os.getenv('IP'),
+	port=int(os.getenv('PORT')),
+	debug=False)
 	# app.run(host=os.environ.get('IP'),
 	# port=int(os.environ.get('PORT')),
 	# debug=False)
