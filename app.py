@@ -10,13 +10,22 @@ from scrap import amazscrap
 
 app = Flask(__name__, template_folder='templates')
 
-#mongo DB details:
-load_dotenv()
-mongo_pwd = os.getenv('MONGOPWD')
-mongo_dbname = 'price-tracker'
-mongo_url = 'mongodb+srv://mongodb_admin:'+ mongo_pwd +'@cluster0-byamh.gcp.mongodb.net/'+ mongo_dbname +'?retryWrites=true&w=majority'
-app.config["MONGO_URI"] = mongo_url
+# Activating the use of .env file containing Environment variables
+load_dotenv() 
+# .env is in the .gitignore file for security reasons
+# Environment variables are then accessed with os.getenv(<var>)
+# Heroku will then be able to access its own environment variables
+# with the same command
+# initialisation can even be used using these Heroku env var
+# with the command 'heroku config -s >> .env'
 
+
+# MongoDB details:
+mongo_login = os.getenv('MONGOLOGIN')
+mongo_pwd = os.getenv('MONGOPWD')
+mongo_dbname = os.getenv('MONGODBNAME')
+mongo_url = 'mongodb+srv://' + mongo_login + ':'+ mongo_pwd +'@cluster0-byamh.gcp.mongodb.net/'+ mongo_dbname +'?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = mongo_url
 
 #Creating a PyMongo instance
 mongo = PyMongo(app)
@@ -30,19 +39,14 @@ def home_func():
 def new_item_func():
 	return render_template('new-item.html')
 
-
 @app.route('/confirmation', methods=["GET", "POST"])
 def new_item_conf_func():
 	new_item_form = request.form
 	item = amazscrap(new_item_form['item-url'])
 	return render_template('new-item-confirmation.html', item=item)
 
+# Running the app
 if __name__=='__main__':
-	# Environment variables set in heroku
-	# app.run(debug=True)
 	app.run(host=os.getenv('IP'),
 	port=int(os.getenv('PORT')),
 	debug=False)
-	# app.run(host=os.environ.get('IP'),
-	# port=int(os.environ.get('PORT')),
-	# debug=False)

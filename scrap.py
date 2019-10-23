@@ -76,7 +76,7 @@ def amazscrap(url, headers=fake_headers):
     # This command above gets us a string of the multiple image links in the form of a dictionary (string type though)
     # Like this : ' {"https://images-na.ssl-images-amazon.com/images/I/61PUG0NvyrL._AC_SX385_.jpg":[385,385],"https:/ .......'
     # That is why we are simply using split and replace to get the first link instead of working on the 'keys()' of a dictionary
-    image_main_link = image_links.split('":[',1)[0].replace('{"','')
+    item_image_main_link = image_links.split('":[',1)[0].replace('{"','')
 
 
     if item_title == None:
@@ -86,8 +86,14 @@ def amazscrap(url, headers=fake_headers):
         print(item_category)
         print(item_currency)
         print(item_price_float)
-        print(image_main_link)
-        item_chars = {'item_short_title' : item_short_title, 'item_category' : item_category , 'item_currency' : item_currency, 'item_price_float' : item_price_float, 'image_main_link' : image_main_link}
+        print(item_image_main_link)
+        item_chars = {'item_short_title' : item_short_title, 
+        'item_title' : item_title,
+        'item_category' : item_category, 
+        'item_currency' : item_currency, 
+        'item_price_float' : item_price_float, 
+        'item_image_main_link' : item_image_main_link, 
+        'item_url':url}
         return item_chars
 
 
