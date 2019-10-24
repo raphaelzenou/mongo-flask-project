@@ -72,12 +72,13 @@ def amazscrap(url, headers=fake_headers):
             item_price_with_currency = item_page_soup.find(id='priceblock_saleprice').get_text().strip()
 
     # Now if the currency is at the end and the European format
-
     try:
+        # USD and GBP
         item_currency = item_price_with_currency[0]
         item_price_string = item_price_with_currency[1:len(item_price_with_currency)]
         item_price_float = float(item_price_string.replace(',',''))
     except:
+        # EUR
         item_currency = item_price_with_currency[-1]
         item_price_string = item_price_with_currency[0:len(item_price_with_currency)-1]
         item_price_float = float(item_price_string.replace(' ','').replace(',','.'))
