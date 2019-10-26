@@ -1,5 +1,6 @@
 # Standard or External packages
 import os
+from datetime import datetime
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -39,16 +40,24 @@ def home_func():
 def new_item_func():
 	return render_template('new-item.html')
 
-@app.route('/confirmation', methods=["GET", "POST"])
+@app.route('/confirmation', methods=["POST"])
+# GET is defaulted so no need to add it
 def new_item_conf_func():
 	new_item_form = request.form
 	item = amazscrap(new_item_form['item_url'])
-	return render_template('new-item-confirmation.html', item=item)
+	user = {'user_name' : new_item_form['user_name'],
+	'user_email' : new_item_form['user_email']}
+	
+	return render_template('new-item-confirmation.html', 
+	xitem=item, user=user)
 
-@app.route('/add', methods=["GET", "POST"])
+@app.route('/add', methods=["POST"])
 def add_item():
-	new_item_form_ok = request.form
-
+	new_item_form_ok = request.form.to_dict()
+	# to_dict method changes the ImmutableMultiDict
+	# type of request.form
+	#so that we can add the date below to it
+	new_item_form_ok['date_added'] = datetime.date(datetime.now())
 	return new_item_form_ok
 
 # Running the app
