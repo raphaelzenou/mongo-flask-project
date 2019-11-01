@@ -7,18 +7,37 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <ul>
             {% for item in items %}
-                <li>{{item.item_name}}</li>
+
+
+            <div class="card" style="width: 18rem;">
+                <!-- css below to be move to the stylesheet if needed: -->
+                <img class="card-img-top img-fluid" 
+                style="height: 10rem; width: 18rem; object-fit: contain;"
+                 src="{{item.item_image_main_link}}" alt="Item Main Picture">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.item_short_title}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Category : 
+                        {{item.item_category}}</li>
+                    <li class="list-group-item">Price : 
+                        {{item.item_currency}}{{item.item_price_float}}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{item.item_url}}" target="_blank" 
+                    class="card-link">Amazon Page</a>
+                </div>
+            </div>
+
             {% endfor %}
-            </ul>
         </div>
     </div>
     <div class="row">
-            <div class="col">
-                <a href="{{url_for('new_item_func')}}">Add New Item</a>
-            </div>
+        <div class="col">
+            <a href="{{url_for('new_item_func')}}">Add New Item</a>
         </div>
+    </div>
 </div>
 
 {% endblock %}

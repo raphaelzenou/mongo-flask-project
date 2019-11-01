@@ -2,3 +2,4 @@ mongo-flask-venv
 gitignored
 .vscode
 .env
+raw_soup.txt

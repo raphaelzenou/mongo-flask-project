@@ -1,5 +1,6 @@
 # Standard or External packages
 import os
+import sys
 from datetime import datetime
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
@@ -25,7 +26,9 @@ load_dotenv()
 mongo_login = os.getenv('MONGOLOGIN')
 mongo_pwd = os.getenv('MONGOPWD')
 mongo_dbname = os.getenv('MONGODBNAME')
-mongo_url = 'mongodb+srv://' + mongo_login + ':'+ mongo_pwd +'@cluster0-byamh.gcp.mongodb.net/'+ mongo_dbname +'?retryWrites=true&w=majority'
+mongo_url = 'mongodb+srv://' + mongo_login + ':'+ mongo_pwd \
++'@cluster0-byamh.gcp.mongodb.net/'\
++ mongo_dbname +'?retryWrites=true&w=majority'
 app.config["MONGO_URI"] = mongo_url
 
 #Creating a PyMongo instance
@@ -44,12 +47,18 @@ def new_item_func():
 # GET is defaulted so no need to add it
 def new_item_conf_func():
 	new_item_form = request.form
-	item = amazscrap(new_item_form['item_url'])
-	user = {'user_name' : new_item_form['user_name'],
-	'user_email' : new_item_form['user_email']}
-	
-	return render_template('new-item-confirmation.html', 
-	xitem=item, user=user)
+	try:
+		item = amazscrap(new_item_form['item_url'])
+		user = {'user_name' : new_item_form['user_name'],
+		# in case we want to ask for email addresses just uncomment here
+		# + in the hmtl templates and mongoDB related operations
+		# 'user_email' : new_item_form['user_email']
+		}	
+		return render_template('new-item-confirmation.html', 
+		item=item, user=user)
+	except:
+		e = sys.exc_info()[1]
+		return render_template('error.html', error=e)
 
 @app.route('/add', methods=["POST"])
 def add_item():
@@ -57,8 +66,9 @@ def add_item():
 	# to_dict method changes the ImmutableMultiDict
 	# type of request.form
 	#so that we can add the date below to it
-	new_item_form_ok['date_added'] = datetime.date(datetime.now())
-	return new_item_form_ok
+	new_item_form_ok['date_added'] = datetime.today()
+	mongo.db.items.insert_one(new_item_form_ok)
+	return redirect(url_for('home_func'))
 
 # Running the app
 if __name__=='__main__':

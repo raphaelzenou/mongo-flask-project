@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>Oops ! There was an error...<br>
+
+            </p>
+            <p>Three options here: <br>
+                <ul>
+                    <li> The page you have used does not have a price selected / active. <br>
+                        So please double check if a price is indeed chosen and try again.
+                    </li>
+                    <li> The page you have used is not covered by the app, typically Books & Kindle, Amazon Prime Video
+                        & Audio, DVDs or Gift Cards<br>
+                        Here we really only included the typical items
+                    </li>
+                    <li>Or eventually it is coming from Amazon who are
+                        preventing us to send too many requests
+                        with a scraper so please use another IP address if you can.
+                    </li>
+                </ul>
+
+            </p>
+            <p>Here is the error for the Python/Flask connoisseurs: <br>
+                {{error}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{{url_for('home_func')}}">Take me Home</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
