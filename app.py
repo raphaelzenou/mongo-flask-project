@@ -51,11 +51,7 @@ def new_item_conf_func():
 	new_item_form = request.form
 	try:
 		item = amazscrap(new_item_form['item_url'])
-		user = {'user_name' : new_item_form['user_name'],
-		# in case we want to ask for email addresses just uncomment here
-		# + in the hmtl templates and mongoDB related operations
-		# 'user_email' : new_item_form['user_email']
-		}	
+		user = {'user_name' : new_item_form['user_name']}	
 		return render_template('new-item-confirmation.html', 
 		item=item, user=user)
 	except:

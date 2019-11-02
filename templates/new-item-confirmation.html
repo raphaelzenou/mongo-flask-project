@@ -20,7 +20,7 @@
                 <p>Price : {{item.item_currency}}{{item.item_price_float}}</p>
                 <p><a href="{{item.item_url}}" target="_blank">Link</a></p>
                 <a href="{{item.item_url}}" target="_blank"><img src="{{item.item_image_main_link}}"
-                        alt="Item Image"></a>
+                        alt="Item Image" style="height: 200px; width: auto; object-fit: contain;"></a>
             </div>
             <form action="{{ url_for('add_item')}}" method="POST">
                 <input type="hidden" value="{{item.item_short_title}}" id="item_short_title" name="item_short_title"
