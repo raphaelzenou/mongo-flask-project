@@ -1,30 +1,48 @@
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
+# user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+# options = webdriver.ChromeOptions()
+# # specify headless mode
+# options.add_argument('headless')
+# # specify the desired user agent
+# options.add_argument(f'user-agent={user_agent}')
+# driver = webdriver.Chrome(options=options)
+# # user-agent is now set
+
+user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+driver = webdriver.Firefox()
 # *** INITIAL HTTP REQUEST *** 
 
-fake_headers = {'User-Agent' : 
-'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) \
-AppleWebKit/537.36 (KHTML, like Gecko) \
-Chrome/77.0.3865.90 Safari/537.36'}
+# fake_headers = {'User-Agent' : 
+# 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) \
+# AppleWebKit/537.36 (KHTML, like Gecko) \
+# Chrome/77.0.3865.90 Safari/537.36'}
 # obtained simply googling 'my user agent'
 
-def amazscrap(url, headers=fake_headers):
+url = 'https://www.amazon.co.uk/Mofi-Samsung-Galaxy-Shockproof-Protective/dp/B07N2N57BK/ref=sr_1_1_sspa?crid=3QZIKP0JHMF6F&keywords=samsung+s10%2B&qid=1571330525&sprefix=samsing%2Caps%2C168&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExS0VPVUpJOUpOV0hEJmVuY3J5cHRlZElkPUEwMjQyNzI0RFNRVjlSOEI3MDEmZW5jcnlwdGVkQWRJZD1BMDg0OTIzNE9XTEFET0UwMU5BNiZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU='
 
-    item_page = requests.get(url, headers=headers)
-    # headers are necessary on amazon to not get 
-    # a http response 503 instead of a 200
 
-# *** CHECKING THE HTPP REQUEST RESPONSE *** 
+def amazscrap(url):
 
-    if item_page.status_code == 200:
-        print('Yay successful http ' 
-        + str(item_page.status_code) 
-        + ' request!')
+    driver.get(url)
+    item_page_content = driver.page_source
 
-    else: 
-        print('Nay.. the http requests failed... code :' 
-        + str(item_page.status_code))
+#     item_page = requests.get(url, headers=headers)
+#     # headers are necessary on amazon to not get 
+#     # a http response 503 instead of a 200
+
+# # *** CHECKING THE HTPP REQUEST RESPONSE *** 
+
+#     if item_page.status_code == 200:
+#         print('Yay successful http ' 
+#         + str(item_page.status_code) 
+#         + ' request!')
+
+#     else: 
+#         print('Nay.. the http requests failed... code :' 
+#         + str(item_page.status_code))
 
 # *** PARSING THE HTML *** 
 
@@ -33,8 +51,8 @@ def amazscrap(url, headers=fake_headers):
     # For debugging purposes
     # Just uncomment the below command
     # And the output will be stored in a txt
-    with open("raw_soup.txt", "w") as raw_soup:     
-        raw_soup.write(str(item_page_soup))
+    # with open("raw_soup.txt", "w") as raw_soup:     
+    #     raw_soup.write(str(item_page_soup))
 
 
     # *** GETTING THE ITEM ATTRIBUTES *** 

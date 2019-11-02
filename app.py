@@ -70,6 +70,12 @@ def add_item():
 	mongo.db.items.insert_one(new_item_form_ok)
 	return redirect(url_for('home_func'))
 
+@app.route('/delete/<item_id>')
+def delete_item(item_id):
+	mongo.db.items.remove({'_id': ObjectId(item_id)})
+	return redirect(url_for('home_func'))
+
+
 # Running the app
 if __name__=='__main__':
 	app.run(host=os.getenv('IP'),

@@ -28,6 +28,10 @@
                     <a href="{{item.item_url}}" target="_blank" 
                     class="card-link">Amazon Page</a>
                 </div>
+                <div class="card-body">
+                        <a href="{{url_for('delete_item', item_id = item._id)}}"
+                        class="card-link">Delete</a>
+                </div>
             </div>
 
             {% endfor %}
