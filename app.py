@@ -67,6 +67,8 @@ def add_item():
 	new_item_form_ok['date_added'] = datetime.today()
 	mongo.db.items.insert_one(new_item_form_ok)
 
+	# Adding user to MongoDB only if not already in the collection
+	# This is made possible using upsert=True
 	mongo.db.users.update(
 		{'user_name' : new_item_form_ok['user_name']},
 		{'$setOnInsert' : 
@@ -78,18 +80,26 @@ def add_item():
 
 @app.route('/delete/<item_id>')
 def delete_item(item_id):
+	user_name = mongo.db.items.find_one({'_id': ObjectId(item_id)})['user_name']
 	mongo.db.items.remove({'_id': ObjectId(item_id)})
-	return redirect(url_for('home_func'))
+	return redirect(url_for('items', user = user_name))
 
-@app.route('/user_items', methods=["POST"])
-def show_user_items():
+# Users filtering happens in two steps
+# First username is retrieved from the form
+@app.route('/user_filter', methods=["POST"])
+def user_filter():
 	user_selection_form = request.form
-	user = user_selection_form['user_name']
+	user_name = user_selection_form['user_name']
+	return redirect(url_for('items', user = user_name))
 
+# Then we use this username to create a bespoke route
+@app.route('/items/<user>')
+def items(user):
 	return render_template('items.html', 
 	items=mongo.db.items.find({'user_name' : user}),
 	users = mongo.db.users.find())
-	
+
+
 # Running the app
 if __name__=='__main__':
 	app.run(host=os.getenv('IP'),
