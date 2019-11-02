@@ -43,7 +43,7 @@ def home_func():
 
 @app.route('/new-item')
 def new_item_func():
-	return render_template('new-item.html')
+	return render_template('new-item.html', users = mongo.db.users.find())
 
 @app.route('/confirmation', methods=["POST"])
 # GET is defaulted so no need to add it
