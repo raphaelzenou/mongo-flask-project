@@ -12,25 +12,22 @@
 
             <div class="card" style="width: 18rem;">
                 <!-- css below to be move to the stylesheet if needed: -->
-                <img class="card-img-top img-fluid" 
-                style="height: 10rem; width: 18rem; object-fit: contain;"
-                 src="{{item.item_image_main_link}}" alt="Item Main Picture">
+                <img class="card-img-top img-fluid" style="height: 10rem; width: 18rem; object-fit: contain;"
+                    src="{{item.item_image_main_link}}" alt="Item Main Picture">
                 <div class="card-body">
                     <h5 class="card-title">{{item.item_short_title}}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Category : 
+                    <li class="list-group-item">Category :
                         {{item.item_category}}</li>
-                    <li class="list-group-item">Price : 
+                    <li class="list-group-item">Price :
                         {{item.item_currency}}{{item.item_price_float}}</li>
                 </ul>
                 <div class="card-body">
-                    <a href="{{item.item_url}}" target="_blank" 
-                    class="card-link">Amazon Page</a>
+                    <a href="{{item.item_url}}" target="_blank" class="card-link">Amazon Page</a>
                 </div>
                 <div class="card-body">
-                        <a href="{{url_for('delete_item', item_id = item._id)}}"
-                        class="card-link">Delete</a>
+                    <a href="{{url_for('delete_item', item_id = item._id)}}" class="card-link">Delete</a>
                 </div>
             </div>
 
@@ -40,6 +37,23 @@
     <div class="row">
         <div class="col">
             <a href="{{url_for('new_item_func')}}">Add New Item</a>
+        </div>
+        <div class="col">
+            <form action="{{ url_for('show_user_items') }}" method="POST">
+
+                <div class="form-group">
+                    <label> Users : </label>
+
+                        <select id="user_name" name="user_name">
+                                <option value="" disabled selected>Choose username</option>
+                                {% for user in users %}
+                                <option value="{{user.user_name}}">{{user.user_name}}</option>
+                                {% endfor %}
+                              </select>
+
+                    <button type="submit" class="btn btn-primary">Select user</button>
+               </div>
+            </form>
         </div>
     </div>
 </div>

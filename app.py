@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 # Own packages
 from scrap import amazscrap
 
+# creating the app
 app = Flask(__name__, template_folder='templates')
 
 # Activating the use of .env file containing Environment variables
@@ -37,7 +38,8 @@ mongo = PyMongo(app)
 #Routes
 @app.route('/')
 def home_func():
-	return render_template('items.html', items=mongo.db.items.find())
+	return render_template('items.html', items=mongo.db.items.find(), 
+	users = mongo.db.users.find())
 
 @app.route('/new-item')
 def new_item_func():
@@ -65,9 +67,17 @@ def add_item():
 	new_item_form_ok = request.form.to_dict()
 	# to_dict method changes the ImmutableMultiDict
 	# type of request.form
-	#so that we can add the date below to it
+	# so that we can add the date below to it and it will work with MongoDB
 	new_item_form_ok['date_added'] = datetime.today()
 	mongo.db.items.insert_one(new_item_form_ok)
+
+	mongo.db.users.update(
+		{'user_name' : new_item_form_ok['user_name']},
+		{'$setOnInsert' : 
+		{'user_name' : new_item_form_ok['user_name'],
+		'date_added' : datetime.today()}},
+		upsert=True)
+	
 	return redirect(url_for('home_func'))
 
 @app.route('/delete/<item_id>')
@@ -75,7 +85,15 @@ def delete_item(item_id):
 	mongo.db.items.remove({'_id': ObjectId(item_id)})
 	return redirect(url_for('home_func'))
 
+@app.route('/user_items', methods=["POST"])
+def show_user_items():
+	user_selection_form = request.form
+	user = user_selection_form['user_name']
 
+	return render_template('items.html', 
+	items=mongo.db.items.find({'user_name' : user}),
+	users = mongo.db.users.find())
+	
 # Running the app
 if __name__=='__main__':
 	app.run(host=os.getenv('IP'),
