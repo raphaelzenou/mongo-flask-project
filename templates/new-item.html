@@ -15,12 +15,20 @@
             placeholder="Please enter the full item's URL here" required>
         <label>User Name:</label>
         <!-- html5 hybrid input/dropdown to enable new users to add -->
-        <input list="user_names" id="user_name" name="user_name" required>
-        <datalist id="user_names">
-            {% for user in users %}
-            <option value="{{user.user_name}}">
+        {% if new_user is sameas true  %}
+            <input list="user_names" id="user_name" name="user_name" required>
+            <datalist id="user_names">
+                {% for user in users %}
+                <option value="{{user.user_name}}">
                 {% endfor %}
-        </datalist>
+            </datalist>
+        
+        {% else %}
+
+            <input type="text" class="form-control" id="user_name" 
+            name="user_name" value = {{users}} required>
+
+        {% endif %}
 
         <button type="submit" class="btn btn-primary">Review Item</button>
 

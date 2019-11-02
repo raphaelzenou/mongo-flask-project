@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+                <a href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
+        </div>
+        <div class="col-md-6">
+            <form action="{{ url_for('user_filter') }}" method="POST">
+    
+                <div class="form-group">
+                    <label> Users : </label>
+    
+                    <select id="user_name" name="user_name">
+                        <option value="" disabled selected>Existing User</option>
+                        {% for user in users %}
+                        <option value="{{user.user_name}}">{{user.user_name}}</option>
+                        {% endfor %}
+                    </select>
+    
+                    <button type="submit" class="btn btn-primary">Go!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+</div>
+
+    {% endblock %}
