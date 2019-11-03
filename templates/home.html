@@ -15,14 +15,14 @@
                 <div class="form-group">
                     <label> Users : </label>
     
-                    <select id="user_name" name="user_name">
+                    <select id="user_name" name="user_name" onchange="this.form.submit()">
                         <option value="" disabled selected>Existing User</option>
                         {% for user in users %}
                         <option value="{{user.user_name}}">{{user.user_name}}</option>
                         {% endfor %}
                     </select>
     
-                    <button type="submit" class="btn btn-primary">Go!</button>
+                    <!-- <button type="submit" class="btn btn-primary">Go!</button> -->
                 </div>
             </form>
         </div>

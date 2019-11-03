@@ -1,5 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
+import os
+# import pdb; pdb.set_trace()
+
 
 # *** INITIAL HTTP REQUEST *** 
 
@@ -8,6 +12,10 @@ fake_headers = {'User-Agent' :
 AppleWebKit/537.36 (KHTML, like Gecko) \
 Chrome/77.0.3865.90 Safari/537.36'}
 # obtained simply googling 'my user agent'
+
+
+# /!\ for testing and debugging only...comment out when done /!\
+# item_url = 'https://www.amazon.com/Comfortable-Adjustable-Position-Ultimate-Blindfold/dp/B014VYD7NW?ref_=Oct_BSellerC_11061971_0&pf_rd_p=0eb9542f-663d-5927-a7aa-2582da3a2106&pf_rd_s=merchandised-search-6&pf_rd_t=101&pf_rd_i=11061971&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=BGB3DWGG8ZRKVDY9C8JF&pf_rd_r=BGB3DWGG8ZRKVDY9C8JF&pf_rd_p=0eb9542f-663d-5927-a7aa-2582da3a2106'
 
 def amazscrap(url, headers=fake_headers):
 
@@ -28,14 +36,22 @@ def amazscrap(url, headers=fake_headers):
 
 # *** PARSING THE HTML *** 
 
-    item_page_soup = BeautifulSoup(item_page.content,
-     'html.parser')
-    # For debugging purposes
-    # Just uncomment the below command
-    # And the output will be stored in a txt
-    with open("raw_soup.txt", "w") as raw_soup:     
-        raw_soup.write(str(item_page_soup))
+    item_page_soup_pre_txt = BeautifulSoup(item_page.content,
+    'html.parser')
 
+    # For some reason beautiful soup only works perfectly well
+    # if the html is first stored as txt and then parsed
+    # this is not perfect but it works
+    
+    temp_txt = "raw_soup_" + str(datetime.today())+ ".txt"
+
+    with open(temp_txt, "w") as raw_soup:     
+        raw_soup.write(str(item_page_soup_pre_txt))
+
+    with open(temp_txt) as txt:
+        item_page_soup = BeautifulSoup(txt.read(), 'html.parser')
+
+    os.remove(temp_txt)
 
     # *** GETTING THE ITEM ATTRIBUTES *** 
 
@@ -45,13 +61,24 @@ def amazscrap(url, headers=fake_headers):
     # need the <span> and any other tags
     # text has to get stripped as amazon is adding 
     # a lot of empty spaces in their html source code
-    item_title = item_page_soup.find(
-        id='productTitle').get_text().strip()
+
+    item_title = item_page_soup.find(id='productTitle').get_text().strip()
+    # item_title = item_page_soup.find(id='productTitle')
+
+    # item_title = item_page_soup.select(
+    #         '#productTitle')[0].get_text().strip()
+
+    # item_title_list = item_page_soup.find('span',
+    # attrs={'id':'productTitle'})
+    # item_title = item_title_list[0].text.strip()
+  
     
+    # Shortening the title to 50 chars max
+
     if len(item_title) <= 50 :
         item_short_title = item_title
     else:
-        item_short_title = item_title[0:45] + '[...]'
+        item_short_title = item_title[0:44] + '[...]'
 
 
     # Categories is not displayed exactly the same Way 
@@ -66,10 +93,13 @@ def amazscrap(url, headers=fake_headers):
        
 
     except:
-        item_category = item_page_soup.find(
-            id='HOME').get_text().strip()
-     
-        
+        # item_category = item_page_soup.find(
+        #     id='HOME').get_text().strip()
+    
+        item_category_list = item_page_soup.findAll(
+            'span',attrs={'id':'HOME'})
+        item_category = item_category_list[0].text.strip()
+
 
     # The same logic applies to , even if the html here is much more similar
     # only the div id differs
@@ -137,5 +167,5 @@ def amazscrap(url, headers=fake_headers):
         return item_chars
 
        
-
+# /!\ for testing and debugging only...comment out when done /!\
 # amazscrap(item_url, fake_headers)

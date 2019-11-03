@@ -3,3 +3,5 @@ gitignored
 .vscode
 .env
 raw_soup.txt
+scrap-dummy.py
+scrap-dummy-rawsoup.py
