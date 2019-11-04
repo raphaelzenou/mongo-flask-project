@@ -56,7 +56,7 @@ def amazscrap(url, headers=fake_headers):
 
     os.remove(temp_txt)
     print('Deleted '+ temp_txt)
-    
+
     # *** GETTING THE ITEM ATTRIBUTES *** 
 
     # BeautifulSoup allows us to find tags by ID 
@@ -66,6 +66,7 @@ def amazscrap(url, headers=fake_headers):
     # text has to get stripped as amazon is adding 
     # a lot of empty spaces in their html source code
 
+    print('Getting the item_title')
     item_title = item_page_soup.find(id='productTitle').get_text().strip()
     # item_title = item_page_soup.find(id='productTitle')
 
@@ -78,7 +79,7 @@ def amazscrap(url, headers=fake_headers):
   
     
     # Shortening the title to 50 chars max
-
+    print('Shortening the item_title')
     if len(item_title) <= 50 :
         item_short_title = item_title
     else:
@@ -89,7 +90,8 @@ def amazscrap(url, headers=fake_headers):
     # depending on whether the page is an Amazon Device page or no
     # Amazon has a different html for their own devices vs other ones
     # That is why we are using a try / except block
-
+    
+    print('Getting the category')
     try :
         item_category_list = item_page_soup.findAll(
             'span',attrs={'class':'nav-a-content'})
@@ -107,7 +109,7 @@ def amazscrap(url, headers=fake_headers):
 
     # The same logic applies to , even if the html here is much more similar
     # only the div id differs
-
+    print('Getting the price')
     try :
         item_price_with_currency = item_page_soup.find(
             id='priceblock_ourprice').get_text().strip()
@@ -120,6 +122,7 @@ def amazscrap(url, headers=fake_headers):
                 id='priceblock_saleprice').get_text().strip()
 
     # Now if the currency is at the end and the European format
+    print('Getting the currency')
     try:
         # USD and GBP
         item_currency = item_price_with_currency[0]
@@ -140,6 +143,7 @@ def amazscrap(url, headers=fake_headers):
     # unfortunately with amazon simply using item_page_soup.find
     # (id='landingImage')['src'] will get you the encoded 
     # base 64 image instead of the url
+    print('Getting the main image url')
     image_links = item_page_soup.find(
         'img', {'id':'landingImage'})[
             'data-a-dynamic-image']

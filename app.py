@@ -59,19 +59,21 @@ def new_item_func(selected_user):
 # GET is defaulted so no need to add it
 def new_item_conf_func():
 	new_item_form = request.form
-	try:
-		item = amazscrap(new_item_form['item_url'])
-		user = {'user_name' : new_item_form['user_name']}	
-		return render_template('new-item-confirmation.html', 
-		item=item, user=user)
-	except:
-		e = sys.exc_info()[1]
-		return render_template('error.html', error=e)
+	#Comment out when debugging
+	# try:
+	# 	item = amazscrap(new_item_form['item_url'])
+	# 	user = {'user_name' : new_item_form['user_name']}	
+	# 	return render_template('new-item-confirmation.html', 
+	# 	item=item, user=user)
+	# except:
+	# 	e = sys.exc_info()[1]
+	# 	return render_template('error.html', error=e)
 	
-	# item = amazscrap(new_item_form['item_url'])
-	# user = {'user_name' : new_item_form['user_name']}	
-	# return render_template('new-item-confirmation.html', 
-	# item=item, user=user)
+	# Useful for debugging:
+	item = amazscrap(new_item_form['item_url'])
+	user = {'user_name' : new_item_form['user_name']}	
+	return render_template('new-item-confirmation.html', 
+	item=item, user=user)
 
 @app.route('/add', methods=["POST"])
 def add_item():
