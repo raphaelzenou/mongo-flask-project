@@ -46,14 +46,17 @@ def amazscrap(url, headers=fake_headers):
     temp_txt = "raw_soup_" + str(datetime.today()).replace(
                 ' ','_').replace(':','.') + ".txt"
 
+    print('Creating '+ temp_txt)
     with open(temp_txt, "w", encoding="utf-8") as raw_soup:     
         raw_soup.write(str(item_page_soup_pre_txt))
 
+    print('Parsing '+ temp_txt)
     with open(temp_txt, "r", encoding="utf-8") as txt:
         item_page_soup = BeautifulSoup(txt.read(), 'html.parser')
 
     os.remove(temp_txt)
-
+    print('Deleted '+ temp_txt)
+    
     # *** GETTING THE ITEM ATTRIBUTES *** 
 
     # BeautifulSoup allows us to find tags by ID 
