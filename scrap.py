@@ -43,12 +43,13 @@ def amazscrap(url, headers=fake_headers):
     # if the html is first stored as txt and then parsed
     # this is not perfect but it works
     
-    temp_txt = "raw_soup_" + str(datetime.today())+ ".txt"
+    temp_txt = "raw_soup_" + str(datetime.today()).replace(
+                ' ','_').replace(':','.') + ".txt"
 
-    with open(temp_txt, "w") as raw_soup:     
+    with open(temp_txt, "w", encoding="utf-8") as raw_soup:     
         raw_soup.write(str(item_page_soup_pre_txt))
 
-    with open(temp_txt) as txt:
+    with open(temp_txt, "r", encoding="utf-8") as txt:
         item_page_soup = BeautifulSoup(txt.read(), 'html.parser')
 
     os.remove(temp_txt)

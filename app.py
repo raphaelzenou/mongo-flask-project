@@ -67,6 +67,11 @@ def new_item_conf_func():
 	except:
 		e = sys.exc_info()[1]
 		return render_template('error.html', error=e)
+	
+	# item = amazscrap(new_item_form['item_url'])
+	# user = {'user_name' : new_item_form['user_name']}	
+	# return render_template('new-item-confirmation.html', 
+	# item=item, user=user)
 
 @app.route('/add', methods=["POST"])
 def add_item():
