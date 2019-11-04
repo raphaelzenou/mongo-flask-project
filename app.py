@@ -70,7 +70,12 @@ def new_item_conf_func():
 	# 	return render_template('error.html', error=e)
 	
 	# Useful for debugging:
+
+	
 	item = amazscrap(new_item_form['item_url'])
+	# item_long = amazscrap(new_item_form['item_url'])
+	# item = item_long.split('?',1)[0]
+	print(item)
 	user = {'user_name' : new_item_form['user_name']}	
 	return render_template('new-item-confirmation.html', 
 	item=item, user=user)

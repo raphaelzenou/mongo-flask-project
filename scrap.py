@@ -54,7 +54,7 @@ def amazscrap(url, headers=fake_headers):
     with open(temp_txt, "r", encoding="utf-8") as txt:
         item_page_soup = BeautifulSoup(txt.read(), 'html.parser')
 
-    os.remove(temp_txt)
+    # os.remove(temp_txt)
     print('Deleted '+ temp_txt)
 
     # *** GETTING THE ITEM ATTRIBUTES *** 
@@ -99,13 +99,15 @@ def amazscrap(url, headers=fake_headers):
        
 
     except:
-        # item_category = item_page_soup.find(
-        #     id='HOME').get_text().strip()
-    
-        item_category_list = item_page_soup.findAll(
-            'span',attrs={'id':'HOME'})
-        item_category = item_category_list[0].text.strip()
-
+        try: 
+            item_category_list = item_page_soup.findAll(
+                'span',attrs={'id':'HOME'})
+            item_category = item_category_list[0].text.strip()
+        except:
+            item_category_list = item_page_soup.findAll(
+                'a',attrs={'class':'a-link-normal a-color-tertiary'})
+            item_category = item_category_list[0].text.strip()
+         
 
     # The same logic applies to , even if the html here is much more similar
     # only the div id differs
