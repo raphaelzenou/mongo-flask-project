@@ -2,8 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import os
-# import pdb; pdb.set_trace()
-
 
 # *** INITIAL HTTP REQUEST *** 
 
@@ -14,8 +12,6 @@ Chrome/77.0.3865.90 Safari/537.36'}
 # obtained simply googling 'my user agent'
 
 
-# /!\ for testing and debugging only...comment out when done /!\
-# item_url = 'https://www.amazon.com/Comfortable-Adjustable-Position-Ultimate-Blindfold/dp/B014VYD7NW?ref_=Oct_BSellerC_11061971_0&pf_rd_p=0eb9542f-663d-5927-a7aa-2582da3a2106&pf_rd_s=merchandised-search-6&pf_rd_t=101&pf_rd_i=11061971&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=BGB3DWGG8ZRKVDY9C8JF&pf_rd_r=BGB3DWGG8ZRKVDY9C8JF&pf_rd_p=0eb9542f-663d-5927-a7aa-2582da3a2106'
 
 def amazscrap(url, headers=fake_headers):
 
@@ -54,7 +50,7 @@ def amazscrap(url, headers=fake_headers):
     with open(temp_txt, "r", encoding="utf-8") as txt:
         item_page_soup = BeautifulSoup(txt.read(), 'html.parser')
 
-    # os.remove(temp_txt)
+    os.remove(temp_txt)
     print('Deleted '+ temp_txt)
 
     # *** GETTING THE ITEM ATTRIBUTES *** 
@@ -175,7 +171,3 @@ def amazscrap(url, headers=fake_headers):
         'item_image_main_link' : item_image_main_link, 
         'item_url':url}
         return item_chars
-
-       
-# /!\ for testing and debugging only...comment out when done /!\
-# amazscrap(item_url, fake_headers)

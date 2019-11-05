@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Item Confirmation{% endblock %}
+
+{% block main %}
+
+<h1>Item confirmation before proceeding... </h1>
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div>
+                <a href="{{item.item_url}}" target="_blank">
+                    <img src="{{item.item_image_main_link}}" alt="Item Image"
+                    style="height: 150px; width: auto; object-fit: contain;">
+                </a>
+            </div>
+            <form action="{{ url_for('add_item')}}" method="POST">
+                <input value="{{item.item_short_title}}" id="item_short_title" 
+                name="item_short_title" required>
+                <input type="hidden" value="{{item.item_title}}" id="item_title" 
+                name="item_title" required readonly>
+                <input value="{{item.item_category}}" id="item_category" 
+                name="item_category" required>
+                <input value="{{item.item_currency}}" id="item_currency" 
+                name="item_currency" required readonly>
+                <input value="{{item.item_price_float}}" id="item_price_float" 
+                name="item_price_float" required >
+                <input type="hidden" value="{{item.item_url}}" id="item_url" 
+                name="item_url" required readonly>
+                <input type="hidden" value="{{item.item_image_main_link}}" 
+                name="item_image_main_link" id="item_image_main_link" 
+                type="hidden" required>
+                <div><a href="{{item.item_url}}" target="_blank">
+                Link</a></div>
+                <input value="{{user.user_name}}" id="user_name" 
+                name="user_name" required readonly>
+                {% if item._id is defined  %}
+                    <input value="{{item._id}}" id="_id" 
+                    name="_id" required readonly>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">
+                OK!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

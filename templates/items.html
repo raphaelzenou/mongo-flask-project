@@ -52,6 +52,9 @@
                 <div class="card-body">
                     <a href="{{url_for('delete_item', item_id = item._id)}}" class="card-link">Delete</a>
                 </div>
+                <div class="card-body">
+                        <a href="{{url_for('edit_item', item_id = item._id)}}" class="card-link">Edit</a>
+                </div>
             </div>
         </div>
     {% endfor %}
