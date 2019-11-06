@@ -59,7 +59,9 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - UnitTest > Testing
     * https://docs.python.org/3/library/unittest.html
     * https://github.com/realpython/discover-flask
-
+- Proxies:
+    * https://www.scrapehero.com/how-to-rotate-proxies-and-ip-addresses-using-python-3/
+    
 Technologies considered but not used :
 - Flask Bootstrap for an easier Bootstrap integration notably with the WTF package
     * https://pythonhosted.org/Flask-Bootstrap/forms.html

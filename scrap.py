@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import os
 
+from proxies import get_proxies
+
+
 # *** INITIAL HTTP REQUEST *** 
 
 fake_headers = {'User-Agent' : 
@@ -33,13 +36,26 @@ def amazscrap(url, headers=fake_headers):
     url = url + '?th=1&psc=1'
     # necessary to have an active price after trimming the url
     # especially for items in sizes such as clothes
+    print('URL cleaned')
+# *** SOURCING PROXIES  *** 
+    print('Now getting proxies')
+    proxy = get_proxies()
+    print(proxy)
 
-# *** HTPP REQUEST + RESPONSE CHECK *** 
+    try:
+# *** HTPP REQUEST  *** 
+# headers are necessary on amazon to not get 
+# a http response 503 instead of a 200
+        item_page = requests.get(url,
+        headers=headers,
+        proxies={"http": proxy, "https": proxy})
+    except:
+        #Most free proxies will often get connection errors. 
+        print("Proxy error let's try without")
+        item_page = requests.get(url, headers=headers)
+           
 
-    item_page = requests.get(url, headers=headers)
-    # headers are necessary on amazon to not get 
-    # a http response 503 instead of a 200
-
+# *** HTPP  RESPONSE CHECK 
     if item_page.status_code == 200:
         print('Yay successful http ' 
         + str(item_page.status_code) 
@@ -95,7 +111,8 @@ def amazscrap(url, headers=fake_headers):
         # a lot of empty spaces in their html source code
 
         try:
-            item_title = item_page_soup.find(id='productTitle').get_text().strip()
+            item_title = item_page_soup.find(
+                id='productTitle').get_text().strip()
             # Shortening the title to 50 chars max
             if len(item_title) <= 50 :
                 item_short_title = item_title
@@ -184,11 +201,8 @@ def amazscrap(url, headers=fake_headers):
             print('Sorry scraper is not working for this page, \
             are you sure it is an amazon standard product page?')
         else: 
+            print('succes for :')
             print(item_short_title)
-            print(item_category)
-            print(item_currency)
-            print(item_price_float)
-            print(item_image_main_link)
             item_chars = {
             'item_short_title' : item_short_title, 
             'item_title' : item_title,
