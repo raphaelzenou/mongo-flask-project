@@ -77,11 +77,12 @@ def new_item_func(selected_user):
 def new_item_conf_func():
 	
 	new_item_form = request.form
+	proxy_or_not = new_item_form['proxy']
 	user = {'user_name' : new_item_form['user_name']}
 
 	if 'amazon' in new_item_form['item_url']:
 		try:
-			item = amazscrap(new_item_form['item_url'])
+			item = amazscrap(new_item_form['item_url'], proxy_or_not)
 
 			if item['item_short_title'] == 'SCRAPER_BLOCKED_BY_AMAZON':
 

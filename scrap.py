@@ -16,7 +16,7 @@ Chrome/77.0.3865.90 Safari/537.36'}
 
 
 
-def amazscrap(url, headers=fake_headers):
+def amazscrap(url, proxy_or_not, headers=fake_headers):
 
 # *** TRIMMING URL  *** 
 
@@ -39,25 +39,28 @@ def amazscrap(url, headers=fake_headers):
     print('URL cleaned')
 
 # *** SOURCING FREE PROXIES  *** 
-    print('Proxy we are going to try using:')
-    proxy = get_random_free_proxy()
-    print(proxy)
+    if proxy_or_not == 'Yes':
 
-    try:
-# *** HTPP REQUEST  *** 
-# headers are necessary on amazon to not get 
-# a http response 503 instead of a 200
-        item_page = requests.get(url,
-        headers=headers,
-        proxies={"http": proxy, "https": proxy})
-    except:
-        # Most free proxies will often get connection errors.
-        # At least we are trying as the proxies.py package works well
-        print("Proxy error let's try without")
-        item_page = requests.get(url, headers=headers)
-           
+        print('Proxy we are going to try using:')
+        proxy = get_random_free_proxy()
+        print(proxy)
 
-# *** HTPP  RESPONSE CHECK 
+        try:
+    # *** HTPP REQUEST  *** 
+    # headers are necessary on amazon to not get 
+    # a http response 503 instead of a 200
+            item_page = requests.get(url,
+            headers=headers,
+            proxies={"http": proxy, "https": proxy})
+        except:
+            # Most free proxies will often get connection errors.
+            # At least we are trying as the proxies.py package works well
+            print("Proxy error let's try without")
+            item_page = requests.get(url, headers=headers)
+    else:
+        item_page = requests.get(url, headers=headers)    
+
+# *** HTPP  RESPONSE CHECK & LOG FOR DEBUGGING ***
     if item_page.status_code == 200:
         print('Yay successful http ' 
         + str(item_page.status_code) 
