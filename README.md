@@ -1,27 +1,24 @@
 # Price Tracker for Amazon with value storage
 
-Price Tracker is an app where users can add amazon links and track the price of the items they like.
-Historical prices are then stored in a noSQL MongoDB Atlas database so users can have a look at the trends .
+Price Tracker is an app where users can add amazon links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
 
-The idea is to combine Python's Beautiful Soup web scrapper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and Materialize in the Front End.
-Hosting will be powered by Heroku connected with GitHub (not Heroku Git) for delployments.
+The idea is to combine Python's Beautiful Soup web scrapper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and a standard CSS framework in the Front End.
+
+Hosting will be powered by Heroku connected with GitHub (not Heroku Git) for deployments.
 
 ## UX
 
 Users will be able to add an amazon link via a form and then add the concerned item to their tracked products.
 Users will also be able to edit, delete entries to offer them the full CRUD experience.
 
-Users will have access to all their entries and will be able to see wether the current price is the lowest since they started tracking a product so as to help them make a decision on whether now is a good time to buy it.
+Users will have access to all their 'Amazon Portfolio' entries but also other users' and will be able to see and edit product characteristics.
 
-Front end design will be done using Materialize
-
-Optional features to potentially be added to make the UX even better:     
-- a user login system is not required for the project, but I am thinking of adding one if time permits)
-- an email alert system using Gmail's SMTP
+Optional features to potentially be added to make the UX even better:
+- Including Amazon sections not in scope as: Kindle, Books in general and basically any other media (audio, video) that can be both physical and digital.
+- A user login system is not required for the project, but it can easily be added in the future as user management is already well defined and used throughout the app.
+- An email alert system using Gmail's SMTP if we also add a price tracking system.
 
 ## Features
-
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
  
 ### Existing Features
 
@@ -32,33 +29,34 @@ In this section, you should go over the different parts of your project, and des
 ### Features Left to Implement
 - Login system:  a user login system is not required for the project, but I am thinking of adding one if time permits).
 - Email alerts: an email alert system using Gmail's SMTP.
-- CRON : runs on UNIX (equivalent to Django CRON)
+- CRON : runs on UNIX (equivalent to Django CRON) enabling us to store and track historical prices so users can have a look at the trends and / or be alerted in case of favourable price changes.
 https://pythonprogramming.net/crontab-tutorial-basics/
 
 ## Technologies Used
 
 In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
-- Python 3.7.0
+- Python 3.7.0 > the base Backend Language
     * https://www.python.org/
-- Flask 1.1.1 our Python web framework
+- Flask 1.1.1 > Web framework
     * https://palletsprojects.com/p/flask/ 
-- Flask-PyMongo 2.3.0 to Interact with our MongoDB Atlas noSQL database
+- Flask-PyMongo 2.3.0 > MongoDB database package
     * https://pypi.org/project/Flask-PyMongo/ 
-- Requests 2.22.0
+- Requests 2.22.0 > HTTP requests
     * Used to get information from websites using HTTP requests
     * https://requests.kennethreitz.org/en/master/
-- Beautifulsoup4  4.8.1 for Web Scraping
+- Beautifulsoup4  4.8.1 > for Web Scraping
     * Used to parse website code obtained using the Requests library
     * https://pypi.org/project/beautifulsoup4/ 
-- Materialize CSS Framework 
+- Materialize or Bootstrap CSS Framework > Front End
     * https://materializecss.com/
-- Dot-Env
+    * https://getbootstrap.com/
+- Dot-Env > Simplified Environment Variables Management
     * https://simpleit.rocks/python/flask/managing-environment-configuration-variables-in-flask-with-dotenv/
     * https://pypi.org/project/python-dotenv/
-- Flash Messages
+- Flash Messages > Informing users of CRUD operations
     * https://flask.palletsprojects.com/en/1.1.x/patterns/flashing/#message-flashing-pattern 
-- UnitTest
+- UnitTest > Testing
     * https://docs.python.org/3/library/unittest.html
     * https://github.com/realpython/discover-flask
 
@@ -67,19 +65,25 @@ Technologies considered but not used :
     * https://pythonhosted.org/Flask-Bootstrap/forms.html
 - Flask WTF to generate forms in the backend quickly (especially using quickforms)
     * https://flask-wtf.readthedocs.io/en/stable/ 
-- ReCaptcha
+- ReCaptcha > to avoid abuse and automation on forms
     * https://techmonger.github.io/5/python-flask-recaptcha/ 
-- Selenium
+- Selenium > to go further in preventing Amazon from blocking scraping
     * https://selenium-python.readthedocs.io/
 
-## Testing (section TBC)
+## Testing and Error Management
 
-DOESN'T WORK with clothes and DVDs/CDs.
+Amazon has implemented anti web scraping systems so we referred to a guide of the best practices for web scraping (see Acknowledgements) and :
+- on one hand made sure to trim the URL to the minimum viable urls to limit tracking from Amazon with extra url parameters and - on the other hand built an error.html page guiding users in case of blocking.
 
+Further information on amazon scraping issues can be found here :
 https://stackoverflow.com/questions/41366099/getting-blocked-when-scraping-amazon-even-with-headers-proxies-delay
 
-I am planning to perform manual and potentially also automated testing using PyTest (not yet included in the packages) :
-https://flask.palletsprojects.com/en/1.0.x/testing/ 
+The aforementioned error page is also useful when users have pasted either:
+- links where no specific price is selected
+- links that are from Amazon sections not in scope as: Kindle, Books in general and basically any other media (audio, video) that can be both physical and digital.
+
+
+I have performed to perform manual and developed some automated tests using the UnitTest package.
 
 ## Deployment
 
@@ -113,8 +117,10 @@ In particular, you should provide all details of the differences between the dep
 - Images are all coming from Amazon's product pages
 
 ### Acknowledgements
+- I received great advice from my mentor Brian Macharia notably on how to structure the project and prioritise the different features and technologies. 
+Brian also taught me the important writing slightly more elegant code (PEP8 concepts) even if I know there is still a long way to go for me.
 
-- I received inspiration for this project from 
+- I received inspiration for this project from the following internet heroes :
     
     * Corey Schaefer for his Beautiful Soup courses https://coreyms.com/
     * Real Python for Tests https://github.com/realpython 

@@ -8,33 +8,42 @@
     <div class="row">
         <div class="col">
             <p>Oops ! There was an error...<br>
+            <p>Here is the nasty thing: <br>
+                {{error}}
+            </p>
 
             </p>
-            <p>Three options here: <br>
+            <p>Troubleshooting: <br>
+                You might be in one the following known cases (if the error is not so obvious).
                 <ul>
+                    <li> The URL provided is not correct or not an Amazon one. <br>
+                    </li>
                     <li> The page you have used does not have a price selected / active. <br>
                         So please double check if a price is indeed chosen and try again.
                     </li>
                     <li> The page you have used is not covered by the app, typically Books & Kindle, Amazon Prime Video
                         & Audio, DVDs or Gift Cards<br>
-                        Here we really only included the typical items
+                        Here we really only included the standard product pages.
                     </li>
-                    <li>Or eventually it is coming from Amazon who are
+                    <li>Or, the worst case, it is coming from Amazon who are
                         preventing us to send too many requests
-                        with a scraper so please use another IP address if you can.
+                        with a scraper so please use another IP or wait a bit and try again
+                        if you can.
                     </li>
                 </ul>
 
             </p>
-            <p>Here is the error for the Python/Flask connoisseurs: <br>
-                {{error}}
-            </p>
+    
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <a href="{{url_for('home_func')}}">Take me Home</a>
+            <a href="{{url_for('new_item_func', selected_user = user.user_name)}}">Let's try again</a>
         </div>
+        <div class="col">
+                <a href="{{url_for('home_func')}}">Take me Home</a>        
+        </div>
+            
     </div>
 </div>
 

@@ -13,9 +13,6 @@ from scrap import amazscrap
 # creating the app
 app = Flask(__name__, template_folder='templates')
 
-# Setting secret key for sessions
-app.secret_key = os.getenv('SECRET_KEY')
-
 # Activating the use of .env file containing Environment variables
 load_dotenv() 
 # .env is in the .gitignore file for security reasons
@@ -24,6 +21,9 @@ load_dotenv()
 # with the same command
 # initialisation can even be used using these Heroku env var
 # with the command 'heroku config -s >> .env'
+
+# Setting secret key for sessions (here mainly flash messages)
+app.secret_key = os.getenv('SECRET_KEY')
 
 
 # MongoDB details:
@@ -38,10 +38,28 @@ app.config["MONGO_URI"] = mongo_url
 #Creating a PyMongo instance
 mongo = PyMongo(app)
 
-#Routes
+# *** ROUTES *** 
+
 @app.route('/')
 def home_func():
 	return render_template('home.html', 
+	users = mongo.db.users.find())
+
+# Users filtering happens in two steps
+# 1 - username is retrieved from the form
+@app.route('/user_filter', methods=["POST"])
+def user_filter():
+	user_selection_form = request.form
+	user_name = user_selection_form['user_name']
+	return redirect(url_for('items', user = user_name))
+
+# 2- we use this username to create a bespoke route
+# to the user page
+@app.route('/items/<user>')
+def items(user):
+	return render_template('items.html', 
+	items=mongo.db.items.find({'user_name' : user}), 
+	active_user = user,
 	users = mongo.db.users.find())
 
 @app.route('/new-item/<selected_user>')
@@ -55,18 +73,30 @@ def new_item_func(selected_user):
 
 @app.route('/confirmation', methods=["POST"])
 # GET is defaulted so no need to add it
+
 def new_item_conf_func():
+	
 	new_item_form = request.form
-	#Comment out when debugging
-	try:
-		item = amazscrap(new_item_form['item_url'])
-		user = {'user_name' : new_item_form['user_name']}	
-		return render_template('item-confirmation.html', 
-		item=item, user=user)
-	except:
-		e = sys.exc_info()[1].to_str()
-		flash(u'Problem with the Item : ' + e , 'error')
-		return render_template('error.html', error=e)
+	user = {'user_name' : new_item_form['user_name']}
+
+	if 'amazon' in new_item_form['item_url']:
+		try:
+			try:
+				item = amazscrap(new_item_form['item_url'])
+				return render_template('item-confirmation.html', 
+				item=item, user=user)
+			except:
+				e = sys.exc_info()[1]
+				return render_template('error.html', 
+				error=e, user=user)
+		except:
+			e = sys.exc_info()[1]
+			return render_template('error.html', 
+			error=e, user=user)
+	else:
+		e = 'You seem to not be using an Amazon product page link.'
+		return render_template('error.html', 
+		error=e, user=user)
 
 @app.route('/add', methods=["POST"])
 def add_item():
@@ -135,22 +165,7 @@ def edit_item(item_id):
 	user = user_details)
 
 
-# Users filtering happens in two steps
-# 1 - username is retrieved from the form
-@app.route('/user_filter', methods=["POST"])
-def user_filter():
-	user_selection_form = request.form
-	user_name = user_selection_form['user_name']
-	return redirect(url_for('items', user = user_name))
 
-# 2- we use this username to create a bespoke route
-# to the user page
-@app.route('/items/<user>')
-def items(user):
-	return render_template('items.html', 
-	items=mongo.db.items.find({'user_name' : user}), 
-	active_user = user,
-	users = mongo.db.users.find())
 
 
 # Running the app

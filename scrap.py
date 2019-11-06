@@ -15,11 +15,28 @@ Chrome/77.0.3865.90 Safari/537.36'}
 
 def amazscrap(url, headers=fake_headers):
 
+# *** TRIMMING URL  *** 
+
+    # First let's trim the URL to make it as
+    # plain and simple as possible to limit tracking
+    # Which increases the chances of getting blocked
+    # 3 known possibilities so far after testing
+
+    
+    if '/?' in url:
+        url = url.split('/?',1)[0]
+    elif '?' in url:
+        url = url.split('?',1)[0]
+    elif '/ref' in url :
+        url = url.split('/ref',1)[0]
+
+
+
+# *** HTPP REQUEST + RESPONSE CHECK *** 
+
     item_page = requests.get(url, headers=headers)
     # headers are necessary on amazon to not get 
     # a http response 503 instead of a 200
-
-# *** CHECKING THE HTPP REQUEST RESPONSE *** 
 
     if item_page.status_code == 200:
         print('Yay successful http ' 
