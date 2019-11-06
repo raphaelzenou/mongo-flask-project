@@ -85,6 +85,21 @@ The aforementioned error page is also useful when users have pasted either:
 
 I have performed to perform manual and developed some automated tests using the UnitTest package.
 
+- Error Handling : 
+    * The new_item_conf_func has an inbuilt error handling system linked to error.html that can take care of any possible errors (even those that I might not have detected yet)
+    * Some error messages have been made explicit for the users e.g. the URL not being an Amazon one
+    * A small Troubleshooting section appears in error.html to guide users in case of error
+    * The user can go back to the form without entering the username again for a better UX
+
+- Manual Tests:
+
+    * Countries : tried running the app with different pages from different countries' dedicatd websistes (e.g. amazon.com, amazon.de, amazon.it, amazon.es, amazon.fr...)
+    * Wrong URLs : tried entering simple strings or what seemed to be urls (http or https .com type of structures)
+    * Tried all possible combinations of the CRUD range
+
+
+Automated Tests: see test.py
+
 ## Deployment
 
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
