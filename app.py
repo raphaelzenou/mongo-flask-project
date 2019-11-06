@@ -81,14 +81,17 @@ def new_item_conf_func():
 
 	if 'amazon' in new_item_form['item_url']:
 		try:
-			try:
-				item = amazscrap(new_item_form['item_url'])
-				return render_template('item-confirmation.html', 
-				item=item, user=user)
-			except:
-				e = sys.exc_info()[1]
+			item = amazscrap(new_item_form['item_url'])
+
+			if item['item_short_title'] == 'SCRAPER_BLOCKED_BY_AMAZON':
+
+				e = 'Amazon blocked the scraper. Please refer to the\
+				 Troubleshooting section below..'
 				return render_template('error.html', 
 				error=e, user=user)
+			else:
+				return render_template('item-confirmation.html', 
+				item=item, user=user)
 		except:
 			e = sys.exc_info()[1]
 			return render_template('error.html', 
