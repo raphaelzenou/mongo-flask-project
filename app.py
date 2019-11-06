@@ -2,7 +2,7 @@
 import os
 import sys
 from datetime import datetime
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
@@ -12,6 +12,9 @@ from scrap import amazscrap
 
 # creating the app
 app = Flask(__name__, template_folder='templates')
+
+# Setting secret key for sessions
+app.secret_key = os.getenv('SECRET_KEY')
 
 # Activating the use of .env file containing Environment variables
 load_dotenv() 
@@ -62,6 +65,7 @@ def new_item_conf_func():
 		item=item, user=user)
 	except:
 		e = sys.exc_info()[1]
+		flash(u'Problem with the Item : ' + e , 'error')
 		return render_template('error.html', error=e)
 
 @app.route('/add', methods=["POST"])
@@ -85,13 +89,14 @@ def add_item():
 				'user_name' : new_item_form_ok['user_name'],
 			},
 			upsert=True)
+		flash(u'Item updated!', 'info')
 
 	# When it is a new object and there is no '_id'
 	# Simply insert
-	except: 
+	except:
 		new_item_form_ok['date_added'] = datetime.today()
 		mongo.db.items.insert_one(new_item_form_ok)
-	
+		flash(u'New item added!', 'info')
 	
 
 
@@ -112,6 +117,7 @@ def delete_item(item_id):
 	user_name = item['user_name']
 	
 	mongo.db.items.remove({'_id': ObjectId(item_id)})
+	flash(u'Item deleted', 'info')
 	return redirect(url_for('items', user = user_name))
 
 # Editing Item

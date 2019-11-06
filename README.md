@@ -56,21 +56,26 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - Dot-Env
     * https://simpleit.rocks/python/flask/managing-environment-configuration-variables-in-flask-with-dotenv/
     * https://pypi.org/project/python-dotenv/
-- ReCaptcha
-    * https://techmonger.github.io/5/python-flask-recaptcha/ 
+- Flash Messages
+    * https://flask.palletsprojects.com/en/1.1.x/patterns/flashing/#message-flashing-pattern 
+- UnitTest
+    * https://docs.python.org/3/library/unittest.html
 
 Technologies considered but not used :
 - Flask Bootstrap for an easier Bootstrap integration notably with the WTF package
     * https://pythonhosted.org/Flask-Bootstrap/forms.html
 - Flask WTF to generate forms in the backend quickly (especially using quickforms)
     * https://flask-wtf.readthedocs.io/en/stable/ 
+- ReCaptcha
+    * https://techmonger.github.io/5/python-flask-recaptcha/ 
+- Selenium
+    * https://selenium-python.readthedocs.io/
 
 ## Testing (section TBC)
 
 DOESN'T WORK with clothes and DVDs/CDs.
 
 https://stackoverflow.com/questions/41366099/getting-blocked-when-scraping-amazon-even-with-headers-proxies-delay
-
 
 I am planning to perform manual and potentially also automated testing using PyTest (not yet included in the packages) :
 https://flask.palletsprojects.com/en/1.0.x/testing/ 
@@ -91,7 +96,10 @@ In particular, you should provide all details of the differences between the dep
 
 - Environment variables on Heroku: 
     * 'MONGOPWD': MongoDB's password for safety
-    * the 'IP' address and 'PORT' of our flask app as suggested in Code Institute's tutorials
+    * 'MONGODBNAME' : collection name for extra safety
+    * 'MONGOLOGIN' :  admin login for extra safety too
+    * 'IP' address and 'PORT' of our flask app as suggested in Code Institute's tutorials
+    * 'SECRET_KEY' : for sessions (flash messages especially here)
 
 
 ## Credits
