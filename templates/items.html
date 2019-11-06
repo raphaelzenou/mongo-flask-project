@@ -4,35 +4,36 @@
 
 {% block main %}
 
-<div class="container-fluid">
-    <div class="row ">
-        <div class="top-container col-md-12">
-            <div class="row top-bar-container">
-                <div class="col-md-6 top-bar">
-                    <a class="btn btn-warning" href="{{url_for('new_item_func', selected_user=active_user)}}">Add New
-                        Item</a>
-                </div>
-                <div class="col-md-6 top-bar">
-                    <form action="{{ url_for('user_filter') }}" method="POST">
-                        <div class="form-group">
-                            <select id="user_name" name="user_name" onchange="this.form.submit()">
-                                <option value={{active_user}} disabled selected>{{active_user}}</option>
-                                {% for user in users %}
-                                {% if user.user_name != active_user %}
-                                <option value="{{user.user_name}}">{{user.user_name}}</option>
-                                {% endif %}
-                                {% endfor %}
-                            </select>
 
-                            <!-- <button type="submit" class="btn btn-warning">Select user</button> -->
-                        </div>
-                    </form>
-                </div>
+<div class="row container-fluid">
+    <div class="top-container col-md-12">
+        <div class="row top-bar-container">
+            <div class="col-md-6 top-bar">
+                <a class="btn btn-warning nav-link" href="{{url_for('new_item_func', selected_user=active_user)}}">Add
+                    New
+                    Item</a>
+            </div>
+            <div class="col-md-6 top-bar">
+                <form action="{{ url_for('user_filter') }}" method="POST">
+                    <div class="form-group nav-dropd">
+                        <select id="user_name" name="user_name" onchange="this.form.submit()">
+                            <option value={{active_user}} disabled selected>{{active_user}}</option>
+                            {% for user in users %}
+                            {% if user.user_name != active_user %}
+                            <option value="{{user.user_name}}">{{user.user_name}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+<div class="container-fluid">
+
     <div class="row">
-    {% for item in items %}
+        {% for item in items %}
         <div class="items-indiv col-md-4">
             <div class="card" style="width: 18rem;">
                 <!-- css below to be move to the stylesheet if needed: -->
@@ -44,24 +45,29 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">User :
                         {{item.user_name}}</li>
-                    <li class="list-group-item">Category :
+                    <li id="item-cat" class="list-group-item ">Category :
                         {{item.item_category}}</li>
                     <li class="list-group-item">Price :
                         {{item.item_currency}}{{item.item_price_float}}</li>
                 </ul>
                 <div class="card-body">
                     <a href="{{item.item_url}}" target="_blank" class="btn-info btn-sm">Amazon Page</a>
-                        <a href="{{url_for('edit_item', item_id = item._id)}}" class="btn-secondary btn-sm">Edit Item</a>
-                        <a href="{{url_for('delete_item', item_id = item._id)}}" class="btn-danger btn-sm">Delete</a>
-                    </div>
+                    <a href="{{url_for('edit_item', item_id = item._id)}}" class="btn-secondary btn-sm">Edit Item</a>
+                    <a href="{{url_for('delete_item', item_id = item._id)}}" class="btn-danger btn-sm">Delete</a>
+                </div>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 
-<div id="home-btn-div">
-    <a href="{{url_for('delete_user', user = active_user)}}" class="btn btn-danger">Delete All My Data</a>
-    <a class="btn btn-warning" href="{{url_for('home_func')}}">Take me Home</a>        
-</div>
+    <div class="row" id="home-btn-div">
+        <div class="col">
+            <a class="btn btn-danger btn-sm" id="delete-data"
+                href="{{url_for('delete_user', user = active_user)}}">Delete All My Data</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-warning btn-sm" href="{{url_for('home_func')}}">Take me Home</a>
+        </div>
+    </div>
 
-{% endblock %}
+    {% endblock %}

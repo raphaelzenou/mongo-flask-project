@@ -3,19 +3,24 @@
 {% block title %}Home{% endblock %}
 
 {% block main %}
-
-<div class="container-fluid">
-    <div class="row ">
+    <div class="row container-fluid">
         <div class="top-container col-md-12">
             <div class="row top-bar-container">
-                <div class="col-md-3 top-bar"></div>
-                <div class="col-md-3 top-bar">
-                    <a class="btn btn-warning" href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
+                <div class="col-md-4 top-bar">
+                    <a class="btn btn-primary nav-link" 
+                    href="{{url_for('new_item_func', selected_user='#')}}">
+                    New User</a>
+
                 </div>
-                <div class="col-md-3 top-bar">
+                <div class="col-md-4 top-bar">
+                    <a class="btn btn-warning nav-link" target="_blank"
+                        href="https://www.amazon.com/gp/navigation-country/select-country/">
+                        Amazon</a>
+                </div>
+                <div class="col-md-4 top-bar">
                     <form action="{{ url_for('user_filter') }}" method="POST">
 
-                        <div class="form-group">
+                        <div class="form-group nav-dropd">
                             <select id="user_name" name="user_name" onchange="this.form.submit()">
                                 <option value="" disabled selected>Existing User</option>
                                 {% for user in users %}
@@ -23,14 +28,38 @@
                                 {% endfor %}
                             </select>
 
-                            <!-- <button type="submit" class="btn btn-warning">Go!</button> -->
                         </div>
                     </form>
                 </div>
-                <div class="col-md-3 top-bar"></div>
             </div>
-            <!-- <div class="row">
-            </div> -->
+        </div>
+    
+
+
+
+    <div class="row container-fluid">
+        <div class="home-welcome col-md-12">
+            <p>
+                Hello and Welcome to the Amazon Web Scraping app!
+
+
+                <br>
+                If you are a new user please click on the big button
+                at the top left hand side to add your first product and
+                create your username at the same time.form-group
+                <br>
+                If you are a returning user... you know the drill.
+                Simply select your username from the dropdown at the top right.
+                <br>
+                Enjoy !
+            </p>
+        </div>
+    </div>
+    <div class="row" id="home-btn-div">
+        <div class="col">
+            <a class="btn btn-warning btn-sm" target="_blank"
+                href="https://www.amazon.com/gp/navigation-country/select-country/">Take
+                me to Amazon (new tab)</a>
         </div>
     </div>
 
