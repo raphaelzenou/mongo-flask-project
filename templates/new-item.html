@@ -6,48 +6,81 @@
 
 <h1>Which Amazon Item would you like to add to your portfolio ? </h1>
 <hr>
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col">
+            <form action="{{ url_for('new_item_conf_func') }}" method="POST">
 
-<form action="{{ url_for('new_item_conf_func') }}" method="POST">
-
-    <div class="form-group">
-        <label>Item's Page Link from Amazon: </label>
-        <input type="text" class="form-control" id="item_url" name="item_url"
-            placeholder="Please enter the full item's URL here" required>
-        <label>User Name:</label>
-        <!-- html5 hybrid input/dropdown to enable new users to add -->
-        {% if new_user is sameas true  %}
-            <input list="user_names" id="user_name" name="user_name" required>
-            <datalist id="user_names">
-                {% for user in users %}
-                <option value="{{user.user_name}}">
-                {% endfor %}
-            </datalist>
-        
-        {% else %}
-
-            <input type="text" class="form-control" id="user_name" 
-            name="user_name" value = {{users}} required readonly>
-
-        {% endif %}
-        <label>Attempting to use a Proxy (slower)? </label>
-        <select id="proxy" name="proxy">
-            <option value="No" selected>No</option>
-            <option value="Yes">Yes</option>
-        </select>
+                <div class="form-group">
+                    <div class="form-row">
+                        <label>Item's Page Link from Amazon: </label>
+                        <input type="text" class="form-control" id="item_url" name="item_url"
+                            placeholder="Please enter the full item's URL here" required>
+                        <label>User Name:</label>
+                        <!-- html5 hybrid input/dropdown to enable new users to add -->
+                    </div>
+                    <div class="form-row">
+                    {% if new_user is sameas true  %}
+                   
 
 
+                        <input list="user_names" id="user_name" name="user_name" required>
+                        <datalist id="user_names">
+                            {% for user in users %}
+                            <option value="{{user.user_name}}">
+                                {% endfor %}
+                        </datalist>
+
+                        {% else %}
+
+                        <input type="text" class="form-control" id="user_name" name="user_name" value={{users}} required
+                            readonly>
+
+                        {% endif %}
+                    </div>
+
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="proxy">Attempting to use a Proxy (slower)?</label>
+                            </div>
+                            <div class="form-group col">
+                                <select class="form-control" id="proxy" name="proxy">
+                                    <option value="No" selected>No</option>
+                                    <option value="Yes">Yes</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <button type="submit" 
+                                class="form-control btn btn-warning">Review Item</button>
+                            </div>
+                        </div>
 
 
-        <button type="submit" class="btn btn-primary">Review Item</button>
-
-</form>
-
-<a class="btn btn-primary" href="{{url_for('home_func')}}">Take me Home</a>        
 
 
-{% block script %}
-<!-- Google ReCaptcha script
-    <script src="https://www.google.com/recaptcha/api.js"></script> -->
-{% endblock %}
+                    </div>
+                </div>
+
+
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<div id="home-btn-div">
+{% if new_user is sameas true  %}
+                   
+
+        <a class="btn btn-warning" href="{{url_for('home_func')}}">Take me Home</a>
+
+
+{% else %}
+
+            <a class="btn btn-warning" href="{{url_for('items', user=users)}}">Take me to my Items</a>
+
+{% endif %}
+</div>
 
 {% endblock %}

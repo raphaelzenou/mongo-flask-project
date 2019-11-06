@@ -7,7 +7,7 @@
 <h1>Item confirmation before proceeding... </h1>
 <hr>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <div>
@@ -49,14 +49,14 @@
                 {% if item._id is defined  %}
                 <input value="{{item._id}}" id="_id" name="_id" required readonly>
                 {% endif %}
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-warning">
                     OK!</button>
             </form>
         </div>
     </div>
 </div>
 <div id="home-btn-div">
-    <a class="btn btn-primary" href="{{url_for('home_func')}}">Take me Home</a>
+    <a class="btn btn-warning" href="{{url_for('home_func')}}">Take me Home</a>
 </div>
 
 

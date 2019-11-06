@@ -4,30 +4,34 @@
 
 {% block main %}
 
-<div class="container">
-    <div class="row top-bar-container">
-        <div class="col-md-6 top-bar">
-                <a class="btn btn-primary" href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
-        </div>
-        <div class="col-md-6 top-bar">
-            <form action="{{ url_for('user_filter') }}" method="POST">
-    
-                <div class="form-group">
-                    <label> Users : </label>
-    
-                    <select id="user_name" name="user_name" onchange="this.form.submit()">
-                        <option value="" disabled selected>Existing User</option>
-                        {% for user in users %}
-                        <option value="{{user.user_name}}">{{user.user_name}}</option>
-                        {% endfor %}
-                    </select>
-    
-                    <!-- <button type="submit" class="btn btn-primary">Go!</button> -->
+<div class="container-fluid">
+    <div class="row ">
+        <div class="top-container col-md-12">
+            <div class="row top-bar-container">
+                <div class="col-md-3 top-bar"></div>
+                <div class="col-md-3 top-bar">
+                    <a class="btn btn-warning" href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
                 </div>
-            </form>
+                <div class="col-md-3 top-bar">
+                    <form action="{{ url_for('user_filter') }}" method="POST">
+
+                        <div class="form-group">
+                            <select id="user_name" name="user_name" onchange="this.form.submit()">
+                                <option value="" disabled selected>Existing User</option>
+                                {% for user in users %}
+                                <option value="{{user.user_name}}">{{user.user_name}}</option>
+                                {% endfor %}
+                            </select>
+
+                            <!-- <button type="submit" class="btn btn-warning">Go!</button> -->
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3 top-bar"></div>
+            </div>
+            <!-- <div class="row">
+            </div> -->
         </div>
     </div>
-    <div class="row">
-</div>
 
     {% endblock %}
