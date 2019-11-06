@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import os
 
-from proxies import get_proxies
+from proxies import get_random_free_proxy
 
 
 # *** INITIAL HTTP REQUEST *** 
@@ -34,12 +34,13 @@ def amazscrap(url, headers=fake_headers):
         url = url.split('/ref',1)[0]
 
     url = url + '?th=1&psc=1'
-    # necessary to have an active price after trimming the url
+    # necessary step to have an active price after trimming the url
     # especially for items in sizes such as clothes
     print('URL cleaned')
-# *** SOURCING PROXIES  *** 
-    print('Now getting proxies')
-    proxy = get_proxies()
+
+# *** SOURCING FREE PROXIES  *** 
+    print('Proxy we are going to try using:')
+    proxy = get_random_free_proxy()
     print(proxy)
 
     try:
@@ -50,7 +51,8 @@ def amazscrap(url, headers=fake_headers):
         headers=headers,
         proxies={"http": proxy, "https": proxy})
     except:
-        #Most free proxies will often get connection errors. 
+        # Most free proxies will often get connection errors.
+        # At least we are trying as the proxies.py package works well
         print("Proxy error let's try without")
         item_page = requests.get(url, headers=headers)
            

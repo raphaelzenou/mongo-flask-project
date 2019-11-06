@@ -1,10 +1,12 @@
-# Price Tracker for Amazon with value storage
+# Web Scraper for Amazon and Proxies with MongoDB storage
 
-Price Tracker is an app where users can add amazon links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
+Price Tracker is an app where users can automatically add amazon links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
 
-The idea is to combine Python's Beautiful Soup web scrapper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and a standard CSS framework in the Front End.
+The idea is to combine Python's Beautiful Soup web scraper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and a standard CSS framework in the Front End.
 
 Hosting will be powered by Heroku connected with GitHub (not Heroku Git) for deployments.
+
+Other notable functionality: the app also scrapes free proxies from 'https://free-proxy-list.net/' and attemps to use them in a randomised way instead of the default one to mitigate the risk of blocking from Amazon anti scraping technology.
 
 ## UX
 
@@ -59,9 +61,13 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - UnitTest > Testing
     * https://docs.python.org/3/library/unittest.html
     * https://github.com/realpython/discover-flask
-- Proxies:
+- Proxies: inspired by these articles
     * https://www.scrapehero.com/how-to-rotate-proxies-and-ip-addresses-using-python-3/
-    
+    * https://blog.scrapinghub.com/python-requests-proxy
+    * Proxies are scraped from 'https://free-proxy-list.net/'
+    * worth noting hey really rarely work though
+    only success in my many attempts : 138.97.116.168:57537
+
 Technologies considered but not used :
 - Flask Bootstrap for an easier Bootstrap integration notably with the WTF package
     * https://pythonhosted.org/Flask-Bootstrap/forms.html
