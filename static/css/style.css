@@ -1,3 +1,44 @@
 body, html {
-    background-color: yellowgreen;
+    height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.7),
+         rgba(255, 255, 255, 0.7)), 
+    url('/static/img/home_mongo.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
+.row, .col {
+	padding: 0;
+	margin: 0;
+}
+
+.btn {
+	font-size: 15px;
+	padding: 10px 10px 10px 10px;
+    margin: 10px;
+    color: black;
+    background-color: tomato;
+    border: none;
+}
+.btn:hover {
+    color: black;
+    background-color: #91f632;
+}
+
+.container-fluid {
+    padding: 100px;
+    border-color: tomato;
+    border-width;: 5px;
+}
+
+#home-btn-div {
+    text-align: center;
+    align-items: center;
+    padding: 30px 0px;
 }

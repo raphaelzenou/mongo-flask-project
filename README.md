@@ -2,7 +2,7 @@
 
 Price Tracker is an app where users can automatically add amazon links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
 
-The idea is to combine Python's Beautiful Soup web scraper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and a standard CSS framework in the Front End.
+The idea is to combine Python's Beautiful Soup web scraper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and a BootStrap CSS framework in the Front End.
 
 Hosting will be powered by Heroku connected with GitHub (not Heroku Git) for deployments.
 
@@ -50,8 +50,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - Beautifulsoup4  4.8.1 > for Web Scraping
     * Used to parse website code obtained using the Requests library
     * https://pypi.org/project/beautifulsoup4/ 
-- Materialize or Bootstrap CSS Framework > Front End
-    * https://materializecss.com/
+- Bootstrap CSS Framework > Front End
     * https://getbootstrap.com/
 - Dot-Env > Simplified Environment Variables Management
     * https://simpleit.rocks/python/flask/managing-environment-configuration-variables-in-flask-with-dotenv/

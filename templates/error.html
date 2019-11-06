@@ -8,9 +8,9 @@
     <div class="row">
         <div class="col">
             <p>Oops ! There was an error...<br>
-            <p>Here is the nasty thing: <br>
-                {{error}}
-            </p>
+                <p>Here is the nasty thing: <br>
+                    {{error}}
+                </p>
 
             </p>
             <p>Troubleshooting: <br>
@@ -34,17 +34,17 @@
                 </ul>
 
             </p>
-    
+
         </div>
     </div>
     <div class="row">
         <div class="col">
             <a href="{{url_for('new_item_func', selected_user = user.user_name)}}">Let's try again</a>
         </div>
-        <div class="col">
-                <a href="{{url_for('home_func')}}">Take me Home</a>        
+
+        <div class="col" id="home-btn-div">
+            <a class="btn btn-primary" href="{{url_for('home_func')}}">Take me Home</a>
         </div>
-            
     </div>
 </div>
 

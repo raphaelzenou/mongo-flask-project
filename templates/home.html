@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-                <a href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
+                <a class="btn btn-primary" href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
         </div>
         <div class="col-md-6">
             <form action="{{ url_for('user_filter') }}" method="POST">
