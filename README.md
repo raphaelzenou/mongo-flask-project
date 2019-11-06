@@ -6,7 +6,7 @@ The idea is to combine Python's Beautiful Soup web scraper with the Flask mini f
 
 Hosting will be powered by Heroku connected with GitHub (not Heroku Git) for deployments.
 
-Other notable functionality: the app also scrapes free proxies from 'https://free-proxy-list.net/' and attemps to use them in a randomised way instead of the default one to mitigate the risk of blocking from Amazon anti scraping technology.
+Other notable functionality: the app also scrapes free proxies from 'free-proxy-list.net' and attempts to use them in a randomised way instead of the default one to mitigate the risk of blocking from Amazon anti scraping technology.
 
 ## UX
 
@@ -66,7 +66,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
     * https://blog.scrapinghub.com/python-requests-proxy
     * Proxies are scraped from 'https://free-proxy-list.net/'
     * worth noting hey really rarely work though
-    only success in my many attempts : 138.97.116.168:57537
+      only success in my many attempts : 138.97.116.168:57537
 
 Technologies considered but not used :
 - Flask Bootstrap for an easier Bootstrap integration notably with the WTF package

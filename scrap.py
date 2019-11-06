@@ -100,7 +100,7 @@ def amazscrap(url, headers=fake_headers):
         with open(temp_txt, "r", encoding="utf-8") as txt:
             item_page_soup = BeautifulSoup(txt.read(), 'html.parser')
 
-        # os.remove(temp_txt)
+        os.remove(temp_txt)
         print('Deleted '+ temp_txt)
 
         # *** GETTING THE ITEM ATTRIBUTES *** 
