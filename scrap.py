@@ -30,7 +30,9 @@ def amazscrap(url, headers=fake_headers):
     elif '/ref' in url :
         url = url.split('/ref',1)[0]
 
-
+    url = url + '?th=1&psc=1'
+    # necessary to have an active price after trimming the url
+    # especially for items in sizes such as clothes
 
 # *** HTPP REQUEST + RESPONSE CHECK *** 
 
