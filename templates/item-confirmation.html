@@ -17,12 +17,29 @@
                 </a>
             </div>
             <form action="{{ url_for('add_item')}}" method="POST">
+                {% if item.item_short_title == 'N/A - Please fill'  %}
+                <input placeholder="{{item.item_short_title}}" id="item_short_title" 
+                name="item_short_title" required maxlength="50">
+                
+                {% else %}
+
                 <input value="{{item.item_short_title}}" id="item_short_title" 
-                name="item_short_title" required>
+                name="item_short_title" required maxlength="50">
+
+                {% endif %}
                 <input type="hidden" value="{{item.item_title}}" id="item_title" 
                 name="item_title" required readonly>
+                {% if item.item_category == 'N/A - Please fill'  %}
+                
+                <input placeholder="{{item.item_category}}" id="item_category" 
+                name="item_category" required maxlength="50">
+                {% else %}
+
                 <input value="{{item.item_category}}" id="item_category" 
-                name="item_category" required>
+                name="item_category" required maxlength="50">
+
+                {% endif %}
+                
                 <input value="{{item.item_currency}}" id="item_currency" 
                 name="item_currency" required readonly>
                 <input value="{{item.item_price_float}}" id="item_price_float" 

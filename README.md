@@ -60,6 +60,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
     * https://flask.palletsprojects.com/en/1.1.x/patterns/flashing/#message-flashing-pattern 
 - UnitTest
     * https://docs.python.org/3/library/unittest.html
+    * https://github.com/realpython/discover-flask
 
 Technologies considered but not used :
 - Flask Bootstrap for an easier Bootstrap integration notably with the WTF package
@@ -105,14 +106,18 @@ In particular, you should provide all details of the differences between the dep
 ## Credits
 
 ### Content
-- The items added to our Price Tracker app are all from Amazon
+- The items added to our Price Tracker app are all from Amazon's website
+- Note that we are not using the API here but rather scrape product pages
 
 ### Media
-- No media used at this stage
+- Images are all coming from Amazon's product pages
 
 ### Acknowledgements
 
 - I received inspiration for this project from 
-    * Simo Edwin https://github.com/DevEdwin
-    * Corey Schaefer Beautiful Soup courses https://coreyms.com/ 
-    * Best practices for web scraping here: https://medium.com/python-pandemonium/6-things-to-develop-an-efficient-web-scraper-in-python-1dffa688793c 
+    
+    * Corey Schaefer for his Beautiful Soup courses https://coreyms.com/
+    * Real Python for Tests https://github.com/realpython 
+    * Simo Edwin for Amazon Scraping https://github.com/DevEdwin
+    * Best practices for web scraping here: 
+    https://medium.com/python-pandemonium/6-things-to-develop-an-efficient-web-scraper-in-python-1dffa688793c 

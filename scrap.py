@@ -62,48 +62,43 @@ def amazscrap(url, headers=fake_headers):
     # text has to get stripped as amazon is adding 
     # a lot of empty spaces in their html source code
 
-    print('Getting the item_title')
-    item_title = item_page_soup.find(id='productTitle').get_text().strip()
-    # item_title = item_page_soup.find(id='productTitle')
+    try:
+        item_title = item_page_soup.find(id='productTitle').get_text().strip()
+         # Shortening the title to 50 chars max
+        if len(item_title) <= 50 :
+            item_short_title = item_title
+        else:
+            item_short_title = item_title[0:44] + '[...]'
 
-    # item_title = item_page_soup.select(
-    #         '#productTitle')[0].get_text().strip()
-
-    # item_title_list = item_page_soup.find('span',
-    # attrs={'id':'productTitle'})
-    # item_title = item_title_list[0].text.strip()
-  
-    
-    # Shortening the title to 50 chars max
-    print('Shortening the item_title')
-    if len(item_title) <= 50 :
-        item_short_title = item_title
-    else:
-        item_short_title = item_title[0:44] + '[...]'
-
+    except:
+        item_title = 'N/A'
+        item_short_title = 'N/A - Please fill'
+   
 
     # Categories is not displayed exactly the same Way 
     # depending on whether the page is an Amazon Device page or no
     # Amazon has a different html for their own devices vs other ones
     # That is why we are using a try / except block
     
-    print('Getting the category')
     try :
         item_category_list = item_page_soup.findAll(
             'span',attrs={'class':'nav-a-content'})
         item_category = item_category_list[0].text.strip()
-       
-
     except:
         try: 
             item_category_list = item_page_soup.findAll(
                 'span',attrs={'id':'HOME'})
             item_category = item_category_list[0].text.strip()
         except:
-            item_category_list = item_page_soup.findAll(
-                'a',attrs={'class':'a-link-normal a-color-tertiary'})
-            item_category = item_category_list[0].text.strip()
-         
+            try:
+                item_category_list = item_page_soup.findAll(
+                    'a',attrs={'class':'a-link-normal a-color-tertiary'})
+                item_category = item_category_list[0].text.strip()
+            except:
+                item_category = 'N/A - Please fill'
+    
+    if item_category == '':
+        item_category = 'N/A - Please fill'
 
     # The same logic applies to , even if the html here is much more similar
     # only the div id differs

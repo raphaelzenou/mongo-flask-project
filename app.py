@@ -64,7 +64,7 @@ def new_item_conf_func():
 		return render_template('item-confirmation.html', 
 		item=item, user=user)
 	except:
-		e = sys.exc_info()[1]
+		e = sys.exc_info()[1].to_str()
 		flash(u'Problem with the Item : ' + e , 'error')
 		return render_template('error.html', error=e)
 
@@ -73,7 +73,10 @@ def add_item():
 	new_item_form_ok = request.form.to_dict()
 	# to_dict method changes the ImmutableMultiDict
 	# type of request.form
-	# so that we can add the date below to it and it will work with MongoDB
+	# so we can add the date below to it and it will work with MongoDB
+
+	if new_item_form_ok['item_title'] == 'N/A':
+		new_item_form_ok['item_title'] = new_item_form_ok['item_short_title']
 
 	try:
 		mongo.db.items.update(
