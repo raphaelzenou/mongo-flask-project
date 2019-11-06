@@ -66,4 +66,5 @@ body, html {
 
 .alert {
     margin : 10px !important;
+    text-align: center;
 }

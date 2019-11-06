@@ -109,9 +109,11 @@ Automated Tests: see test.py
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+The project has been deployed on Heroku based on the corresponding GitHub directory (https://github.com/raphaelzenou/mongo-flask-project).
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
+URL :  https://mongo-flask-project.herokuapp.com/
+
+See below the key parameters of this deployment.
 
 - Virtual Environment: 
     * a venv 'mongo-flask-venv' has been created locally to better control the module versions used and limit the requirement.txt file to the scope of our Flask app (instead of installing all our python modules..)

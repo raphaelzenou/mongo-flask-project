@@ -86,8 +86,12 @@ def new_item_conf_func():
 
 			if item['item_short_title'] == 'SCRAPER_BLOCKED_BY_AMAZON':
 
-				e = 'Amazon blocked the scraper. Please refer to the\
-				 Troubleshooting section below..'
+				e = 'Amazon blocked the scraper. \
+				Please try clearing your browsing data and if you can \
+				also change your IP address with a VPN.\
+				You can also simply try using the proxy option provided.\
+				Apologies for the inconvenience but Amazon is fighting hard\
+				to prevent us from scraping their product pages...'
 				return render_template('error.html', 
 				error=e, user=user)
 			else:
