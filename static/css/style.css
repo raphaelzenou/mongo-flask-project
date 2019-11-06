@@ -12,16 +12,22 @@ body, html {
     background-size: cover;
 
 }
+.central-container {
+    /* width: 100%; */
+    border-style: solid;
+    border-width: 5px;
+    
+}
 
 .row, .col {
 	padding: 0;
 	margin: 0;
 }
 
-.btn {
+.btn, #user_name {
 	font-size: 15px;
-	padding: 10px 10px 10px 10px;
-    margin: 10px;
+	padding: 5px !important;
+    margin: 5px;
     color: black;
     background-color: tomato;
     border: none;
@@ -31,14 +37,33 @@ body, html {
     background-color: #91f632;
 }
 
-.container-fluid {
-    padding: 100px;
-    border-color: tomato;
-    border-width;: 5px;
-}
 
 #home-btn-div {
     text-align: center;
     align-items: center;
-    padding: 30px 0px;
+    padding: 30px 0px 0px 0px;
+}
+
+.top-bar-container{ 
+    background-color: #91f632;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.top-bar {
+    color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    align-items: center;
+}
+.form-group {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.alert {
+    margin : 10px !important;
 }

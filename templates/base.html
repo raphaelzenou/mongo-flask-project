@@ -20,18 +20,22 @@
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-    <ul class=flashes>
         {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span class="{{ category }}">{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% endfor %}
-    </ul>
     {% endif %}
     {% endwith %}
 </head>
 
 <body>
 
-    <div class='container-fluid'>
+    <div class='mx-auto central-container'>
 
         <main>
             {% block main %}{% endblock %}

@@ -5,11 +5,11 @@
 {% block main %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row top-bar-container">
+        <div class="col-md-6 top-bar">
                 <a class="btn btn-primary" href="{{url_for('new_item_func', selected_user='#')}}">New User</a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 top-bar">
             <form action="{{ url_for('user_filter') }}" method="POST">
     
                 <div class="form-group">
