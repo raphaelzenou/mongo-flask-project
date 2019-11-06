@@ -57,10 +57,14 @@ def user_filter():
 # to the user page
 @app.route('/items/<user>')
 def items(user):
+	# try:
 	return render_template('items.html', 
 	items=mongo.db.items.find({'user_name' : user}), 
 	active_user = user,
 	users = mongo.db.users.find())
+	# except:
+	# 	#for new users
+	# 	return redirect(url_for('home_func'))
 
 @app.route('/new-item/<selected_user>')
 def new_item_func(selected_user):
@@ -151,15 +155,8 @@ def add_item():
 	return redirect(url_for('items', 
 	user = new_item_form_ok['user_name'] ))
 
-# Deleting item and then routing to the user page
-@app.route('/delete/<item_id>')
-def delete_item(item_id):
-	item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
-	user_name = item['user_name']
-	
-	mongo.db.items.remove({'_id': ObjectId(item_id)})
-	flash(u'Item deleted', 'info')
-	return redirect(url_for('items', user = user_name))
+
+
 
 # Editing Item
 @app.route('/edit/<item_id>')
@@ -172,6 +169,23 @@ def edit_item(item_id):
 	item = item_details,
 	user = user_details)
 
+# Deleting item and then routing to the user page
+@app.route('/delete/<item_id>')
+def delete_item(item_id):
+	item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
+	user_name = item['user_name']
+	mongo.db.items.remove({'_id': ObjectId(item_id)})
+	flash(u'Item deleted', 'info')
+	return redirect(url_for('items', user = user_name))
+
+
+# Deleting user and then routing to the homepage
+@app.route('/delete_user/<user>')
+def delete_user(user):	
+	mongo.db.items.remove({'user_name': user})
+	mongo.db.users.remove({'user_name': user})
+	flash(u'All ' + user + 'user data deleted!', 'info')
+	return redirect(url_for('home_func'))
 
 
 

@@ -43,20 +43,23 @@
                 <input type="hidden" value="{{item.item_url}}" id="item_url" name="item_url" required readonly>
                 <input type="hidden" value="{{item.item_image_main_link}}" name="item_image_main_link"
                     id="item_image_main_link" type="hidden" required>
-                <div><a href="{{item.item_url}}" target="_blank">
-                        Link</a></div>
-                <input value="{{user.user_name}}" id="user_name" name="user_name" required readonly>
+                <input type="hidden" value="{{user.user_name}}" id="user_name" name="user_name" required readonly>
                 {% if item._id is defined  %}
-                <input value="{{item._id}}" id="_id" name="_id" required readonly>
+                <input type = "hidden" value="{{item._id}}" id="_id" name="_id" required readonly>
                 {% endif %}
-                <button type="submit" class="btn btn-warning">
-                    OK!</button>
+                <button type="submit" class="btn btn-success btn-sm">
+                Okay </button>
+
+                <a class="btn btn-secondary btn-sm" 
+                href="{{url_for('items', user=user.user_name)}}">Cancel</a>
+
             </form>
         </div>
     </div>
 </div>
 <div id="home-btn-div">
     <a class="btn btn-warning" href="{{url_for('home_func')}}">Take me Home</a>
+
 </div>
 
 
