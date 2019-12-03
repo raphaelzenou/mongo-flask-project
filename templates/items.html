@@ -5,17 +5,18 @@
 {% block main %}
 
 
+
+
 <div class="row container-fluid">
-    <div class="top-container col-md-12">
+    <div class="top-container col-md-12 mb-10">
         <div class="row top-bar-container">
             <div class="col-md-6 top-bar">
-                <a class="btn btn-warning nav-link" href="{{url_for('new_item_func', selected_user=active_user)}}">Add
-                    New
-                    Item</a>
+                <a class="top-bar-elem btn btn-warning nav-link" href="{{url_for('new_item_func', selected_user=active_user)}}">
+                    Add New Item</a>
             </div>
             <div class="col-md-6 top-bar">
                 <form action="{{ url_for('user_filter') }}" method="POST">
-                    <div class="form-group nav-dropd">
+                    <div class="top-bar-elem form-group nav-dropd">
                         <select id="user_name" name="user_name" onchange="this.form.submit()">
                             <option value={{active_user}} disabled selected>{{active_user}}</option>
                             {% for user in users %}
@@ -30,12 +31,30 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
 
-    <div class="row">
+<div class="row">
+    <div class="col">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+            
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span class="{{ category }}">{{ message }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row" id='item-cards'>
         {% for item in items %}
-        <div class="items-indiv col-md-4">
-            <div class="card" style="width: 18rem;">
+        <div class="items-indiv col-md-4 d-flex justify-content-center">
+            <div class="card align-middle" style="width: 18rem;">
                 <!-- css below to be move to the stylesheet if needed: -->
                 <img class="card-img-top img-fluid" style="height: 10rem; width: 18rem; object-fit: contain;"
                     src="{{item.item_image_main_link}}" alt="Item Main Picture">
@@ -51,7 +70,7 @@
                         {{item.item_currency}}{{item.item_price_float}}</li>
                 </ul>
                 <div class="card-body">
-                    <a href="{{item.item_url}}" target="_blank" class="btn-info btn-sm">Amazon Page</a>
+                    <a href="{{item.item_url}}" target="_blank" class="btn-info btn-sm">Currys Page</a>
                     <a href="{{url_for('edit_item', item_id = item._id)}}" class="btn-secondary btn-sm">Edit Item</a>
                     <a href="{{url_for('delete_item', item_id = item._id)}}" class="btn-danger btn-sm">Delete</a>
                 </div>
@@ -70,4 +89,4 @@
         </div>
     </div>
 
-    {% endblock %}
+{% endblock %}

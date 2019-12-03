@@ -18,19 +18,7 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <span class="{{ category }}">{{ message }}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
 </head>
 
 <body>
@@ -38,6 +26,19 @@
     <div class='mx-auto central-container'>
 
         <main>
+                <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span class="{{ category }}">{{ message }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %} -->
             {% block main %}{% endblock %}
         </main>
 

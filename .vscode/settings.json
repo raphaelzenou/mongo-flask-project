@@ -3,5 +3,9 @@
         "**/mongo-flask-venv": true,
         "**/.vscode": true
     },
-    "editor.rulers": [80,120]
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "python.pythonPath": "mongo-flask-venv\\Scripts\\python.exe"
 }

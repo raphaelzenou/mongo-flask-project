@@ -84,29 +84,13 @@ def new_item_conf_func():
 	proxy_or_not = new_item_form['proxy']
 	user = {'user_name' : new_item_form['user_name']}
 
-	if 'amazon' in new_item_form['item_url']:
-		try:
-			item = amazscrap(new_item_form['item_url'], proxy_or_not)
-
-			if item['item_short_title'] == 'SCRAPER_BLOCKED_BY_AMAZON':
-
-				e = 'Amazon blocked the scraper. \
-				Please try clearing your browsing data and if you can \
-				also change your IP address with a VPN.\
-				You can also simply try using the proxy option provided.\
-				Apologies for the inconvenience but Amazon is fighting hard\
-				to prevent us from scraping their product pages...'
-				return render_template('error.html', 
-				error=e, user=user)
-			else:
-				return render_template('item-confirmation.html', 
-				item=item, user=user)
-		except:
-			e = sys.exc_info()[1]
-			return render_template('error.html', 
-			error=e, user=user)
-	else:
-		e = 'You seem to not be using an Amazon product page link.'
+	try:
+		item = amazscrap(new_item_form['item_url'], proxy_or_not)
+		return render_template('item-confirmation.html', 
+		item=item, user=user)
+		
+	except:
+		e = sys.exc_info()[1]
 		return render_template('error.html', 
 		error=e, user=user)
 

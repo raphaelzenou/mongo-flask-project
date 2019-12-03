@@ -3,50 +3,67 @@
 {% block title %}Home{% endblock %}
 
 {% block main %}
-    <div class="row container-fluid">
-        <div class="top-container col-md-12">
-            <div class="row top-bar-container">
-                <div class="col-md-4 top-bar">
-                    <a class="btn btn-primary nav-link" 
-                    href="{{url_for('new_item_func', selected_user='#')}}">
+<div class="row container-fluid">
+    <div class="top-container col-md-12">
+        <div class="row top-bar-container">
+            <div class="col-md-4 top-bar">
+                <a class="btn btn-primary nav-link" href="{{url_for('new_item_func', selected_user='#')}}">
                     New User</a>
 
-                </div>
-                <div class="col-md-4 top-bar">
-                    <a class="btn btn-warning nav-link" target="_blank"
-                        href="https://www.amazon.com/gp/navigation-country/select-country/">
-                        Amazon</a>
-                </div>
-                <div class="col-md-4 top-bar">
-                    <form action="{{ url_for('user_filter') }}" method="POST">
+            </div>
+            <div class="col-md-4 top-bar">
+                <a class="btn btn-warning nav-link" target="_blank"
+                    href="https://www.currys.co.uk/">
+                    Currys website</a>
+            </div>
+            <div class="col-md-4 top-bar">
+                <form action="{{ url_for('user_filter') }}" method="POST">
 
-                        <div class="form-group nav-dropd">
-                            <select id="user_name" name="user_name" onchange="this.form.submit()">
-                                <option value="" disabled selected>Existing User</option>
-                                {% for user in users %}
-                                <option value="{{user.user_name}}">{{user.user_name}}</option>
-                                {% endfor %}
-                            </select>
+                    <div class="form-group nav-dropd">
+                        <select id="user_name" name="user_name" onchange="this.form.submit()">
+                            <option value="" disabled selected>Existing User</option>
+                            {% for user in users %}
+                            <option value="{{user.user_name}}">{{user.user_name}}</option>
+                            {% endfor %}
+                        </select>
 
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-    
+    </div>
 
 
+    <div class="row container-fluid">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span class="{{ category }}">{{ message }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
 
     <div class="row container-fluid">
         <div class="home-welcome col-md-12">
+
+
             <p>
-                Hello and Welcome to the Amazon Web Scraping app!
+                Hello and Welcome to the Currys PC World Web Scraping app!
 
 
                 <br>
                 If you are a new user please click on the big button
                 at the top left hand side to add your first product and
-                create your username at the same time.form-group
+                create your username at the same time.
                 <br>
                 If you are a returning user... you know the drill.
                 Simply select your username from the dropdown at the top right.
@@ -58,8 +75,8 @@
     <div class="row" id="home-btn-div">
         <div class="col">
             <a class="btn btn-warning btn-sm" target="_blank"
-                href="https://www.amazon.com/gp/navigation-country/select-country/">Take
-                me to Amazon (new tab)</a>
+                href="https://www.currys.co.uk/">Take
+                me to Currys (new tab)</a>
         </div>
     </div>
 

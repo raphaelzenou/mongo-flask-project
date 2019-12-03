@@ -5,3 +5,6 @@ gitignored
 raw_soup.txt
 scrap-dummy.py
 scrap-dummy-rawsoup.py
+__pycache__/
+.vscode/
+
