@@ -1,4 +1,4 @@
-# Web Scraper for Amazon and Proxies with MongoDB storage
+# Web Scraper for Curry PC World and Proxies with MongoDB storage
 
 Price Tracker is an app where users can automatically add amazon links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
 
