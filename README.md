@@ -1,22 +1,21 @@
 # Web Scraper for Curry PC World and Proxies with MongoDB storage
 
-Price Tracker is an app where users can automatically add amazon links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
+Price Tracker is an app where users can automatically add currys pc world links and store the price and characteristics of the items they like in a noSQL MongoDB Atlas database.
 
 The idea is to combine Python's Beautiful Soup web scraper with the Flask mini framework and Mongo DB (using PyMongo) in the Back End and a BootStrap CSS framework in the Front End.
 
 Hosting will be powered by Heroku connected with GitHub (not Heroku Git) for deployments.
 
-Other notable functionality: the app also scrapes free proxies from 'free-proxy-list.net' and attempts to use them in a randomised way instead of the default one to mitigate the risk of blocking from Amazon anti scraping technology.
+Other notable functionality: the app also scrapes free proxies from 'free-proxy-list.net' and attempts to use them in a randomised way instead of the default one to mitigate the risk of blocking from Curry's anti scraping technology.
 
 ## UX
 
-Users will be able to add an amazon link via a form and then add the concerned item to their tracked products.
+Users will be able to add an Curry's link via a form and then add the concerned item to their tracked products.
 Users will also be able to edit, delete entries to offer them the full CRUD experience.
 
-Users will have access to all their 'Amazon Portfolio' entries but also other users' and will be able to see and edit product characteristics.
+Users will have access to all their 'Curry's Portfolio' entries but also other users' and will be able to see and edit product characteristics.
 
 Optional features to potentially be added to make the UX even better:
-- Including Amazon sections not in scope as: Kindle, Books in general and basically any other media (audio, video) that can be both physical and digital.
 - A user login system is not required for the project, but it can easily be added in the future as user management is already well defined and used throughout the app.
 - An email alert system using Gmail's SMTP if we also add a price tracking system.
 
@@ -24,7 +23,7 @@ Optional features to potentially be added to make the UX even better:
  
 ### Existing Features
 
-- Create : Users will be able to add an amazon link via a form and then add the concerned item to their tracked products.
+- Create : Users will be able to add an Curry's link via a form and then add the concerned item to their tracked products.
 - Read : Users will have access to all their entries and will be able to see wether the current price is the lowest since they started tracking a product so as to help them make a decision on whether now is a good time to buy it.
 - Update / Delete : Users will also be able to edit, delete entries to offer them the full CRUD experience.
 
